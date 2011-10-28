@@ -1,0 +1,27 @@
+# xcode
+build
+build/*
+*.pbxuser
+*.perspectivev3
+*.icns
+*.1
+*.lproj
+*.lproj/*
+Info.plist
+
+# osx
+.DS_Store
+profile
+
+# vs
+Win32
+*.vcproj.user
+*.vcproj.*.user
+*.ncb
+*.aps
+*.suo
+*.idb
+*.pdb
+
+# other
+*~
