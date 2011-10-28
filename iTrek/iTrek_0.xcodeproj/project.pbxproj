@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* iTrek_0.1 */; };
+		96902BB40EBC963A001AA3AD /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.c */; };
+		96902BB50EBC963A001AA3AD /* battle.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.c */; };
+		96902BB60EBC963A001AA3AD /* events.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.c */; };
+		96902BB70EBC963A001AA3AD /* finish.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAC0EBC963A001AA3AD /* finish.c */; };
+		96902BB80EBC963A001AA3AD /* moving.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAD0EBC963A001AA3AD /* moving.c */; };
+		96902BB90EBC963A001AA3AD /* osx.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAE0EBC963A001AA3AD /* osx.c */; };
+		96902BBA0EBC963A001AA3AD /* planets.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAF0EBC963A001AA3AD /* planets.c */; };
+		96902BBB0EBC963A001AA3AD /* reports.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB00EBC963A001AA3AD /* reports.c */; };
+		96902BBC0EBC963A001AA3AD /* setup.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB10EBC963A001AA3AD /* setup.c */; };
+		96902BBD0EBC963A001AA3AD /* sst.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB20EBC963A001AA3AD /* sst.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8DD76F6C0486A84900D96B5E /* iTrek_0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = iTrek_0; sourceTree = BUILT_PRODUCTS_DIR; };
+		96902BA90EBC963A001AA3AD /* ai.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ai.c; sourceTree = "<group>"; };
+		96902BAA0EBC963A001AA3AD /* battle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = battle.c; sourceTree = "<group>"; };
+		96902BAB0EBC963A001AA3AD /* events.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = events.c; sourceTree = "<group>"; };
+		96902BAC0EBC963A001AA3AD /* finish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = finish.c; sourceTree = "<group>"; };
+		96902BAD0EBC963A001AA3AD /* moving.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = moving.c; sourceTree = "<group>"; };
+		96902BAE0EBC963A001AA3AD /* osx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = osx.c; sourceTree = "<group>"; };
+		96902BAF0EBC963A001AA3AD /* planets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planets.c; sourceTree = "<group>"; };
+		96902BB00EBC963A001AA3AD /* reports.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reports.c; sourceTree = "<group>"; };
+		96902BB10EBC963A001AA3AD /* setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setup.c; sourceTree = "<group>"; };
+		96902BB20EBC963A001AA3AD /* sst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sst.c; sourceTree = "<group>"; };
+		96902BB30EBC963A001AA3AD /* sst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst.h; sourceTree = "<group>"; };
+		96A5331210E1627300577602 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
+		C6859E8B029090EE04C91782 /* iTrek_0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = iTrek_0.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* iTrek_0 */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = iTrek_0;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				96902BA90EBC963A001AA3AD /* ai.c */,
+				96902BAA0EBC963A001AA3AD /* battle.c */,
+				96902BAB0EBC963A001AA3AD /* events.c */,
+				96902BAC0EBC963A001AA3AD /* finish.c */,
+				96902BAD0EBC963A001AA3AD /* moving.c */,
+				96902BAE0EBC963A001AA3AD /* osx.c */,
+				96902BAF0EBC963A001AA3AD /* planets.c */,
+				96902BB00EBC963A001AA3AD /* reports.c */,
+				96902BB10EBC963A001AA3AD /* setup.c */,
+				96902BB20EBC963A001AA3AD /* sst.c */,
+				96902BB30EBC963A001AA3AD /* sst.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* iTrek_0 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* iTrek_0.1 */,
+				96A5331210E1627300577602 /* Todo */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* iTrek_0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "iTrek_0" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTrek_0;
+			productInstallPath = "$(HOME)/bin";
+			productName = iTrek_0;
+			productReference = 8DD76F6C0486A84900D96B5E /* iTrek_0 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "iTrek_0" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* iTrek_0 */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* iTrek_0 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96902BB40EBC963A001AA3AD /* ai.c in Sources */,
+				96902BB50EBC963A001AA3AD /* battle.c in Sources */,
+				96902BB60EBC963A001AA3AD /* events.c in Sources */,
+				96902BB70EBC963A001AA3AD /* finish.c in Sources */,
+				96902BB80EBC963A001AA3AD /* moving.c in Sources */,
+				96902BB90EBC963A001AA3AD /* osx.c in Sources */,
+				96902BBA0EBC963A001AA3AD /* planets.c in Sources */,
+				96902BBB0EBC963A001AA3AD /* reports.c in Sources */,
+				96902BBC0EBC963A001AA3AD /* setup.c in Sources */,
+				96902BBD0EBC963A001AA3AD /* sst.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = iTrek_0;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = iTrek_0;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "iTrek_0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "iTrek_0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
