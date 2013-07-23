@@ -361,7 +361,7 @@ static void makemoves(void) {
 }
 
 
-void main(int argc, char **argv) {
+int main(int argc, char **argv) {
 	int i;
 	int hitme;
 	char ch;
@@ -401,6 +401,7 @@ void main(int argc, char **argv) {
 	}
 	skip(1);
 	prout("May the Great Bird of the Galaxy roost upon your home planet.");
+	return 0;
 }
 
 
@@ -508,7 +509,11 @@ int scan(void) {
     // Read next line: this is reached when line = '\0' and 
     // linep points to start of line. This occurs after call to 
     // chew()
-		gets(line);
+//		gets(line);
+		// We should really be using fgets
+		fgets(line,sizeof(line),stdin);
+		if (line[strlen(line)-1] == '\n')
+			line[strlen(line)-1] = '\0';
 		linep = line;
 	}
 	// Skip leading white space

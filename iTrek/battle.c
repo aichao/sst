@@ -862,11 +862,8 @@ void photon(void) {
 				return;
 			}
 			if (n > 3) {
-				chew();
 				prout("Maximum of 3 torpedoes per burst.");
-				key = IHEOL;
-			}
-			if (n <= torps) break;
+			} else if (n <= torps) break;
 			chew();
 			key = IHEOL;
 		}
