@@ -1,40 +1,36 @@
 /*
  *  phasers_mode.hpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/22/11.
  *  Copyright 2011 Alan I Chao. All rights reserved.
  *
  */
 
-#ifndef PHASERS_MODE_HPP
-#define PHASERS_MODE_HPP
+#ifndef iTrek_phasers_mode_hpp
+#define iTrek_phasers_mode_hpp
 
-#include "PromptCommandState.hpp"
+#include "command_state.hpp"
 
 namespace iTrek { 
-namespace CommandInputState {   
-  
+namespace command_input_state {   
+
 /** 
  */
-class phasers_mode : public PromptCommandState {
+class phasers_mode : public command_state {
  public:
-  
-  /** Interface to execute the state action. State specific processing
-   *  is implemented in the derived class. This method is responsible 
-   *  for transitioning the state after executing the state action. 
-   *  While executing the state action, this method may also post 
-   *  events to the EventQueue.
+  /** This method .... 
+   *  This method always return handled_but_incomplete.
    */
-  virtual void executeAction(CommandInputHandler * handler);
+  virtual boost::logic::tribool handle(command_input_handler* handler) const;
   
-  /** Interface to return the prompt corresponding to the state. State 
-   *  specific prompt is implemented in the derived class.
-   */
-  virtual std::string getPrompt() const;
+  /// Return the prompt corresponding to the get_command state.
+  virtual boost::optional<std::string> prompt() const {
+    return boost::optional<std::string>("Manual or automatic? ");
+  }       
 };
-  
-} // end namespace CommandInputState
-} // end namesoace iTrek
+
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

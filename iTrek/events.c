@@ -594,7 +594,7 @@ void snova(int insx, int insy) {
 	int nrmdead, npdead;
 	int insipient=0;
 
-	nsx = insy;
+	nsx = insx;
 	nsy = insy;
 
 	if (insy== 0) {
@@ -689,6 +689,7 @@ void snova(int insx, int insy) {
 		/* did in the Supercommander! */
 		d.nscrem = d.isx = d.isy = isatb = iscate = 0;
 		iscdead = 1;
+		kldead--; /* Fix installed May 2013 */
 		future[FSCMOVE] = future[FSCDBAS] = 1e30;
 	}
 	d.remkl -= kldead;

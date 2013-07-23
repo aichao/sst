@@ -26,7 +26,7 @@ typedef struct {
 EXTERN struct foo {
 		int snap,		// snapshot taken
 		remkl,			// remaining klingons
-	    remcom,			// remaining commanders
+	        remcom,			// remaining commanders
 		rembase,		// remaining bases
 		starkl,			// destroyed stars
 		basekl,			// destroyed bases
@@ -266,7 +266,7 @@ typedef enum {FWON, FDEPLETE, FLIFESUP, FNRG, FBATTLE,
 
 
 EXTERN double aaitem;
-EXTERN char citem[10];
+EXTERN char citem[12];
 
 
 /* Define devices */

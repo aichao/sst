@@ -691,7 +691,7 @@ void atover(int igrab) {
 	skip(1);
 	do {
 		if (justin) {
-			prouts("***RED ALERT!  READ ALERT!");
+			prouts("***RED ALERT!  RED ALERT!");
 			skip(1);
 			proutn("The ");
 			crmshp();

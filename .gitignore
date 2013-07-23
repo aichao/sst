@@ -25,3 +25,5 @@ Win32
 
 # other
 *~
+*.orig
+*.doc

@@ -1,14 +1,14 @@
 /*
  *  command_input_utilities.hpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/22/11.
  *  Copyright 2011 Alan I Chao. All rights reserved.
  *
  */
 
-#ifndef ITREK_COMMAND_INPUT_UTILITIES_HPP
-#define ITREK_COMMAND_INPUT_UTILITIES_HPP
+#ifndef iTrek_command_input_utilities_hpp
+#define iTrek_command_input_utilities_hpp
 
 #include <string>
 
@@ -21,12 +21,24 @@ namespace iTrek {
  */
 bool is_partial_match(std::string const& one, std::string const& oth);
   
-/** Function returning true if input string is a number. A number
+/** Predicate returning true if input string is a number. A number
  *  is defined as a string containing only [0-9] and "+-." in the 
  *  local locale.
  */
-bool is_number(std::string const& in); 
+bool is_number(std::string const& in);
   
+/** Predicate returning true if input string is an integer. An integer
+ *  is defined as a string containing only [0-9] and "+-" in the 
+ *  local locale.
+ */
+bool is_integer(std::string const& in); 
+  
+/** Predicate returning true if input string is an unsigned integer. An 
+ *  unsigned integer is defined as a string containing only [0-9] in the 
+ *  local locale.
+ */
+bool is_unsigned(std::string const& in); 
+
 } // end namespace iTrek
 
 #endif
