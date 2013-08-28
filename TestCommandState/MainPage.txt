@@ -18,22 +18,36 @@ The normal use case in getting and processing user input(s) within a state is:
 1) Prompt the user for the user's input corresponding to the state.
 2) Get the user's input corresponding to the prompt.
 3) Interpret the user's input to set the command data.
-4) Transition to the next state corresponding to the current command data and possibly external data such as the game state (i.e., damage state).
+4) Transition to the next state corresponding to the current command data and possibly external data 
+such as the game state (i.e., damage state).
 
 However, other use cases are:
 
-1) Transition to the next state is not dependent on prompted user input, but on external data only. The phasers command is an example. Depending on whether there are enemies present and the damage states of the computer and sensors, the transition to the next state can be either manual phasers, automatic phasers, or a prompt asking for manual or automatic.
-2) In the super star trek game, the user can input multiple segments of a command at once. For example, at the command prompt, the use can input "phasers manual" instead of waiting for the manual or automatic prompt. The expected behavior in this case is to parse the input and transition to the next appropriate state (i.e., skipping the intermediate states for which the command input has already been given). Note that the transitions along the way can also be influenced by external data.
-3) In the super star trek game, there are optional segments of the command data that can be input by the user at different states. The expected behavior is to parse for these optional inputs and to set the appropriate command data. In addition, there is default values for these optional inputs and handling of cases where the user may input these at multiple command states in which case the behavior is either to ignore the additional inputs or to signal error.
+1) Transition to the next state is not dependent on prompted user input, but on external data only. 
+The phasers command is an example. Depending on whether there are enemies present and the damage states 
+of the computer and sensors, the transition to the next state can be either manual phasers, automatic 
+phasers, or a prompt asking for manual or automatic.
+2) In the super star trek game, the user can input multiple segments of a command at once. For example, 
+at the command prompt, the use can input "phasers manual" instead of waiting for the manual or automatic 
+prompt. The expected behavior in this case is to parse the input and transition to the next appropriate 
+state (i.e., skipping the intermediate states for which the command input has already been given). Note 
+that the transitions along the way can also be influenced by external data.
+3) In the super star trek game, there are optional segments of the command data that can be input by the 
+user at different states. The expected behavior is to parse for these optional inputs and to set the 
+appropriate command data. In addition, there is default values for these optional inputs and handling of 
+cases where the user may input these at multiple command states in which case the behavior is either to 
+ignore the additional inputs or to signal error.
 
 To cover these other use cases:
 
-1) Separate concepts for PromptCommandState and CommandState. PromptCommandState inherits from CommandState and adds prompt event when 
-CommandQueue is empty. CommandState is used for situations where an intermediate state is necessary to make transition decisions based on 
-either external data or commands left on the queue. For example, CommandState as opposed to PromptCommandState is used for cases 
-where previously we had an empty prompt string.
-2) Added interface to CommandState to peek at the next element on the CommandQueue to check its value or to determine if the queue
-is empty. Peeking can be used to check for optional command data prior to getting (popping) them off the queue.
+1) Separate concepts for PromptCommandState and CommandState. PromptCommandState inherits from CommandState 
+and adds prompt event when CommandQueue is empty. CommandState is used for situations where an intermediate 
+state is necessary to make transition decisions based on either external data or commands left on the queue. 
+For example, CommandState as opposed to PromptCommandState is used for cases where previously we had an 
+empty prompt string.
+2) Added interface to CommandState to peek at the next element on the CommandQueue to check its value or to 
+determine if the queue is empty. Peeking can be used to check for optional command data prior to getting 
+(popping) them off the queue.
 
 Threads:
 

@@ -13,12 +13,6 @@ int main (int argc, char * const argv[]) {
   iTrek::command_input_handler cmd_handler;
   iTrek::command_data complete_cmd;
   do {
-    // get display events (if any) and send to std::cout
-    std::string display_events = cmd_handler.get_display_events();
-    if (!display_events.empty()) {
-      std::cout << display_events << std::endl;
-      cmd_handler.clear_display_events();
-    }
     // get the prompt
     boost::optional<std::string> prompt = cmd_handler.current_state().prompt();
     iTrek::command_input_event cmd_inp;
@@ -32,7 +26,14 @@ int main (int argc, char * const argv[]) {
       std::cout << "Error: current state should return a prompt" << std::endl;
       exit(-1);
     }
-    if (cmd_handler.handle(cmd_inp)) {
+    bool complete = cmd_handler.handle(cmd_inp);
+    // get display events (if any) and send to std::cout
+    std::string display_events = cmd_handler.get_display_events();
+    if (!display_events.empty()) {
+      std::cout << display_events << std::endl;
+      cmd_handler.clear_display_events();
+    }
+    if (complete) {
       complete_cmd = cmd_handler.get_command_data();
       std::cout << "Executing: " << complete_cmd << std::endl;
       cmd_handler.clear_command_data();
