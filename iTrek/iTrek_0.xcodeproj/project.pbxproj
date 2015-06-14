@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* iTrek_0.1 */; };
 		96902BB40EBC963A001AA3AD /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.c */; };
 		96902BB50EBC963A001AA3AD /* battle.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.c */; };
 		96902BB60EBC963A001AA3AD /* events.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.c */; };
@@ -27,7 +26,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -47,7 +45,6 @@
 		96902BB20EBC963A001AA3AD /* sst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sst.c; sourceTree = "<group>"; };
 		96902BB30EBC963A001AA3AD /* sst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst.h; sourceTree = "<group>"; };
 		96A5331210E1627300577602 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
-		C6859E8B029090EE04C91782 /* iTrek_0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = iTrek_0.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +97,6 @@
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				C6859E8B029090EE04C91782 /* iTrek_0.1 */,
 				96A5331210E1627300577602 /* Todo */,
 			);
 			name = Documentation;
@@ -134,7 +130,11 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "iTrek_0" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* iTrek_0 */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -169,6 +169,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -180,6 +183,7 @@
 				);
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = iTrek_0;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -187,10 +191,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = iTrek_0;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

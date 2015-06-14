@@ -13,7 +13,7 @@
 #include <string>
 //#include <unordered_map>
 
-#include <boost/pool/detail/singleton.hpp>
+#include <prism/acip/boost_1_42_0_ext/pool/detail/singleton.hpp>
 //#include <boost/shared_ptr.hpp>
 
 #include <prism/acip/util/sorted_vector.hpp>
