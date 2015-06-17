@@ -162,6 +162,10 @@ boost::logic::tribool phasers_command::handle(command_input_handler* handler) co
   //
   //  Question: Is it more natural for a choice state to pop the next token (can be empty) or just peek? The
   //  choice state does not have a prompt.
+
+  // AIC_NOTE: this bit of code is meant to retrieve an optional input that can
+  // be inserted at this state. Should be able to abstract this as a member
+  // of command_state
   command_data next_cmd = peek_at_token_queue(handler);
   // if next_cmd is no, then get this command, add to command data, and peek at next command
   if (is_partial_match("no", next_cmd)) {
@@ -170,7 +174,15 @@ boost::logic::tribool phasers_command::handle(command_input_handler* handler) co
     append_command_data(handler, tokens[0]);
     next_cmd = peek_at_token_queue(handler);
   }
-  
+
+  // @todo: check command state wrt game state should use the visitor pattern.
+  // The check should be a method of the game state or global function using
+  // borh game state and handler as inputs. It is the game state's
+  // responsibility to change the command state appropriately based on the game
+  // state. If the game state does not impact the command state, the check
+  // should return false, in which case this method should proceed as usual.
+  // Otherwise, the chek should return true, in which case this method should
+  // return handled_but_incomplete immediately.
   if ((next_cmd.empty() && damage[DCOMPTR] == 0 && damage[DSRSENS] == 0 && nenhere > 0) ||
       is_partial_match("manual", next_cmd) ||
       is_partial_match("automatic", next_cmd)) {

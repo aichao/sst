@@ -85,16 +85,18 @@ class command_state {
    */
   command_data peek_at_token_queue(command_input_handler* handler) const;
   
-  /** Get a specified number of command data tokens from the command queue. If the command
-   *  queue is empty, this method first inserts a prompt event onto the event queue using 
-   *  the state's prompt message. Then it waits on the cmomand queue for inputs. This method
-   *  is guaranteed to return with at least one token, even if that token is an empty string.
-   *  This method can return less than the requested number of tokens if the command queue 
-   *  does not have the requested number of tokens. This usually results from an error in 
-   *  comand input, which is to be handled by the concrete state. Furthermore, the command 
-   *  queue can have more tokens than requested in the queue. In this case, only the specified
-   *  number is popped from the queue and returned. This method should only be called by 
-   *  concrete states that requires command data from the command queue.
+  /** Get a specified number of command data tokens from the command queue. If 
+   *  the commandvqueue is empty, this method first inserts a prompt event onto 
+   *  the event queue using the state's prompt message. Then it waits on the 
+   *  command queue for inputs. This method is guaranteed to return with at 
+   *  least one token, even if that token is an empty string. This method can 
+   *  return less than the requested number of tokens if the command queue does 
+   *  not have the requested number of tokens. This usually results from an 
+   *  error in command input, which is to be handled by the concrete state. 
+   *  Furthermore, the command queue can have more tokens than requested in the 
+   *  queue. In this case, only the specified number is popped from the queue 
+   *  and returned. This method should only be called by concrete states that 
+   *  requires command data from the command queue.
    */
   virtual void get_command_inputs(command_input_handler* handler, 
                                   std::size_t n, command_inputs & tokens) const;
