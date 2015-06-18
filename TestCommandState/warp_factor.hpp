@@ -21,7 +21,7 @@ class warp_factor : public command_state {
  public:
   /** This method processes the next command in the queue and checks if it is 
    *  numeric. If it is, then the command is complete and this method returns 
-   *  true. If it is not, then the state is tranitioned to the command error 
+   *  true. If it is not, then the state is transitioned to the command error 
    *  state and this method returns handled_but_incomplete. If the command 
    *  queue is empty, then this method returns false and the prompt is 
    *  triggered.
