@@ -32,7 +32,7 @@ class shields_toggle : public command_state {
   virtual boost::optional<std::string> prompt() const;
 };
 
-} // end namesoace command_input_state
-} // end namesoace iTrek
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

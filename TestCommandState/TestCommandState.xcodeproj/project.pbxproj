@@ -37,6 +37,9 @@
 		96EEFB051B3206A80051781B /* impulse_command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB031B3206A60051781B /* impulse_command.cpp */; };
 		96EEFB081B3209FB0051781B /* warp_command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB061B3209F90051781B /* warp_command.cpp */; };
 		96EEFB0B1B320CA10051781B /* warp_factor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB091B320C9F0051781B /* warp_factor.cpp */; };
+		96EEFB0E1B3301E50051781B /* probe_command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB0C1B3301E20051781B /* probe_command.cpp */; };
+		96EEFB111B3309290051781B /* probe_query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB0F1B3309250051781B /* probe_query.cpp */; };
+		96EEFB141B330BAF0051781B /* probe_armed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96EEFB121B330BAC0051781B /* probe_armed.cpp */; };
 		96F693E1145337BD009561EC /* command_input_utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96F693E0145337BD009561EC /* command_input_utilities.cpp */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +110,12 @@
 		96EEFB071B3209FA0051781B /* warp_command.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = warp_command.hpp; sourceTree = "<group>"; };
 		96EEFB091B320C9F0051781B /* warp_factor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = warp_factor.cpp; sourceTree = "<group>"; };
 		96EEFB0A1B320CA00051781B /* warp_factor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = warp_factor.hpp; sourceTree = "<group>"; };
+		96EEFB0C1B3301E20051781B /* probe_command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = probe_command.cpp; sourceTree = "<group>"; };
+		96EEFB0D1B3301E30051781B /* probe_command.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = probe_command.hpp; sourceTree = "<group>"; };
+		96EEFB0F1B3309250051781B /* probe_query.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = probe_query.cpp; sourceTree = "<group>"; };
+		96EEFB101B3309270051781B /* probe_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = probe_query.hpp; sourceTree = "<group>"; };
+		96EEFB121B330BAC0051781B /* probe_armed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = probe_armed.cpp; sourceTree = "<group>"; };
+		96EEFB131B330BAD0051781B /* probe_armed.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = probe_armed.hpp; sourceTree = "<group>"; };
 		96F693DF145337BD009561EC /* command_input_utilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = command_input_utilities.hpp; sourceTree = "<group>"; };
 		96F693E0145337BD009561EC /* command_input_utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = command_input_utilities.cpp; sourceTree = "<group>"; };
 		96F694911453A0E8009561EC /* phasers_mode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = phasers_mode.hpp; sourceTree = "<group>"; };
@@ -235,6 +244,12 @@
 				96EEFB071B3209FA0051781B /* warp_command.hpp */,
 				96EEFB091B320C9F0051781B /* warp_factor.cpp */,
 				96EEFB0A1B320CA00051781B /* warp_factor.hpp */,
+				96EEFB0C1B3301E20051781B /* probe_command.cpp */,
+				96EEFB0D1B3301E30051781B /* probe_command.hpp */,
+				96EEFB0F1B3309250051781B /* probe_query.cpp */,
+				96EEFB101B3309270051781B /* probe_query.hpp */,
+				96EEFB121B330BAC0051781B /* probe_armed.cpp */,
+				96EEFB131B330BAD0051781B /* probe_armed.hpp */,
 			);
 			name = command_input_state;
 			sourceTree = "<group>";
@@ -325,6 +340,9 @@
 				96EEFB051B3206A80051781B /* impulse_command.cpp in Sources */,
 				96EEFB081B3209FB0051781B /* warp_command.cpp in Sources */,
 				96EEFB0B1B320CA10051781B /* warp_factor.cpp in Sources */,
+				96EEFB0E1B3301E50051781B /* probe_command.cpp in Sources */,
+				96EEFB111B3309290051781B /* probe_query.cpp in Sources */,
+				96EEFB141B330BAF0051781B /* probe_armed.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,7 +31,7 @@ public:
   }
 };
 
-} // end namesoace command_input_state
-} // end namesoace iTrek
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

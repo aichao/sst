@@ -40,7 +40,7 @@ class photon_target_sector : public command_state {
   unsigned n_tgts_;
 };
 
-} // end namesoace command_input_state
-} // end namesoace iTrek
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

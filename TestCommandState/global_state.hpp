@@ -81,6 +81,9 @@ extern double shldup;
 // Global variable for energy level
 extern double energy;
 
+// Global variable for number of probes (left)
+extern int nprobes;
+
 // computes the distance between two sector locations in a quadrant
 double compute_distance(double s1_x, double s1_y, double s2_x, double s2_y);
 

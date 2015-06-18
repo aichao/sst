@@ -64,6 +64,9 @@ double shldup = 0.;
 // Global variable for energy level
 double energy = 5000.;
 
+// Global variable for number of probes (left)
+int nprobes = 3;
+
 // computes the distance between two sector locations in a quadrant
 double compute_distance(double s1_x, double s1_y, double s2_x, double s2_y) {
   return std::sqrt((s1_x - s2_x) * (s1_x - s2_x) + (s1_y - s2_y) * (s1_y - s2_y));

@@ -43,6 +43,6 @@ class manual_phaser_units : public command_state {
 };
     
 } // end namespace command_input_state
-} // end namesoace iTrek
+} // end namespace iTrek
 
 #endif

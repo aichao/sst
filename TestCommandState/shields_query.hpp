@@ -34,7 +34,7 @@ class shields_query : public command_state {
   }
 };
 
-} // end namesoace command_input_state
-} // end namesoace iTrek
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

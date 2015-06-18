@@ -27,7 +27,7 @@ class shields_command : public command_state {
   virtual boost::logic::tribool handle(command_input_handler* handler) const;
 };
 
-} // end namesoace command_input_state
-} // end namesoace iTrek
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif
