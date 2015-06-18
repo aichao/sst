@@ -7,23 +7,18 @@
 5) REPORT
 6) COMPUTER
 7) DOCK
-8) REST <number of stardates>      How long?
-9) CALL
-10) ABANDON
-11) DESTRUCT
-12) QUIT
-13) SENSORS
-14) ORBIT
-15) TRANSPORT
-16) SHUTTLE
-17) MINE
-18) CRYSTALS
-19) PLANETS
-20) FREEZE <filename>   File name:
-21) REQUEST <item>      Information desired?
-22) DEATHRAY
-23) EMEXIT
-24) HELP <command>      Help on what command?
+8) CALL
+9) ABANDON
+10) DESTRUCT
+11) SENSORS
+12) ORBIT
+13) TRANSPORT
+14) SHUTTLE
+15) MINE
+16) CRYSTALS
+17) PLANETS
+18) DEATHRAY
+19) EMEXIT
 
 For the probe command:
 i) if just probe, prompt # probe(s) left.\nAre you sure you want to fire a probe?

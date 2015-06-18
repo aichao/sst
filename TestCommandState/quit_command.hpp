@@ -19,9 +19,9 @@ namespace command_input_state {
  */
 class quit_command : public command_state {
  public:
-  /** This method clears the token queue and the command data and then 
-   *  transition to the get_command state. This method always return 
-   *  handled_but_incomplete.
+  /** This method adds the input token to the command data, clears the token 
+   *  queue, and transitions to the get_command state. This method always 
+   *  return true because the input token is the completed command.
    */
   virtual boost::logic::tribool handle(command_input_handler* handler) const;
 };
