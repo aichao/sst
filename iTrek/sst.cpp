@@ -5,12 +5,32 @@
 #include <dos.h>
 #endif
 #include <time.h>
-	
-/*int getch(void);
-*/
+
+// functions defined in osx.c
+int max(int, int);
+int getch(void);
 
 static char line[128], *linep = line;
 static int linecount;	/* for paging */
+
+PLANETS nulplanet = {0};
+char const *device[ndevice+1] = {
+	"",
+	"S. R. Sensors",
+	"L. R. Sensors",
+	"Phasers",
+	"Photon Tubes",
+	"Life Support",
+	"Warp Engines",
+	"Impulse Engines",
+	"Shields",
+	"Subspace Radio",
+	"Shuttle Craft",
+	"Computer",
+	"Transporter",
+	"Shield Control",
+  "Death Ray",
+  "D. S. Probe"};
 
 static void clearscreen(void);
 
@@ -53,7 +73,7 @@ static void clearscreen(void);
    */
 
 
-static char *commands[NUMCOMMANDS] = {
+static char const *commands[NUMCOMMANDS] = {
 	"srscan",
 	"lrscan",
 	"phasers",
@@ -407,7 +427,7 @@ int main(int argc, char **argv) {
 
 void cramen(int i) {
 	/* return an enemy */
-	char *s;
+	char const *s;
 	
 	switch (i) {
 		case IHR: s = "Romulan"; break;
@@ -442,7 +462,7 @@ void crmena(int i, int enemy, int key, int x, int y) {
 }
 
 void crmshp(void) {
-	char *s;
+	char const *s;
 	switch (ship) {
 		case IHE: s = "Enterprise"; break;
 		case IHF: s = "Faerie Queene"; break;
@@ -709,16 +729,16 @@ void skip(int i) {
 }
 
 
-void proutn(char *s) {
+void proutn(char const *s) {
 	fputs(s, stdout);
 }
 
-void prout(char *s) {
+void prout(char const *s) {
 	proutn(s);
 	skip(1);
 }
 
-void prouts(char *s) {
+void prouts(char const *s) {
 	clock_t endTime;
 	/* print slowly! */
 	while (*s) {
@@ -735,7 +755,7 @@ void huh(void) {
 	prout("Beg your pardon, Captain?");
 }
 
-int isit(char *s) {
+int isit(char const *s) {
 	/* New function -- compares s to scaned citem and returns true if it
 	   matches to the length of s */
 

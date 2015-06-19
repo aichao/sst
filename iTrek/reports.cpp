@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// defined in osx.c
+int min(int, int);
+
 void attakreport(void) {
 	if (future[FCDBAS] < 1e30) {
 		proutn("Starbase in ");
@@ -24,7 +27,7 @@ void attakreport(void) {
 	
 
 void report(int f) {
-	char *s1,*s2,*s3;
+	char const *s1,*s2,*s3;
 
 	chew();
 	s1 = (thawed?"thawed ":"");
@@ -222,7 +225,7 @@ void chart(int nn) {
 void srscan(int l) {
 	static char requests[][3] =
 		{"","da","co","po","ls","wa","en","to","sh","kl","ti"};
-	char *cp;
+	char const *cp;
 	int leftside=TRUE, rightside=TRUE, i, j, jj, k=0, nn=FALSE;
 	int goodScan=TRUE;
 	switch (l) {

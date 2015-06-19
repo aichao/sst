@@ -1,6 +1,10 @@
 #include <time.h>
 #include "sst.h"
 
+// defined in osx.c
+void randomize(void);
+int min(int, int);
+
 void prelim(void) {
 	skip(2);
 	prout("-SUPER- STAR TREK");

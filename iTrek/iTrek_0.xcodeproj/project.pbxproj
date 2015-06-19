@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		960AD4A31B2E067A0046C899 /* iTrek_0 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DD76F6C0486A84900D96B5E /* iTrek_0 */; };
-		96902BB40EBC963A001AA3AD /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.c */; };
-		96902BB50EBC963A001AA3AD /* battle.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.c */; };
-		96902BB60EBC963A001AA3AD /* events.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.c */; };
-		96902BB70EBC963A001AA3AD /* finish.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAC0EBC963A001AA3AD /* finish.c */; };
-		96902BB80EBC963A001AA3AD /* moving.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAD0EBC963A001AA3AD /* moving.c */; };
-		96902BB90EBC963A001AA3AD /* osx.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAE0EBC963A001AA3AD /* osx.c */; };
-		96902BBA0EBC963A001AA3AD /* planets.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAF0EBC963A001AA3AD /* planets.c */; };
-		96902BBB0EBC963A001AA3AD /* reports.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB00EBC963A001AA3AD /* reports.c */; };
-		96902BBC0EBC963A001AA3AD /* setup.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB10EBC963A001AA3AD /* setup.c */; };
-		96902BBD0EBC963A001AA3AD /* sst.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB20EBC963A001AA3AD /* sst.c */; };
+		96902BB40EBC963A001AA3AD /* ai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.cpp */; };
+		96902BB50EBC963A001AA3AD /* battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.cpp */; };
+		96902BB60EBC963A001AA3AD /* events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.cpp */; };
+		96902BB70EBC963A001AA3AD /* finish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAC0EBC963A001AA3AD /* finish.cpp */; };
+		96902BB80EBC963A001AA3AD /* moving.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAD0EBC963A001AA3AD /* moving.cpp */; };
+		96902BB90EBC963A001AA3AD /* osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAE0EBC963A001AA3AD /* osx.cpp */; };
+		96902BBA0EBC963A001AA3AD /* planets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAF0EBC963A001AA3AD /* planets.cpp */; };
+		96902BBB0EBC963A001AA3AD /* reports.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB00EBC963A001AA3AD /* reports.cpp */; };
+		96902BBC0EBC963A001AA3AD /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB10EBC963A001AA3AD /* setup.cpp */; };
+		96902BBD0EBC963A001AA3AD /* sst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB20EBC963A001AA3AD /* sst.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,16 +35,16 @@
 
 /* Begin PBXFileReference section */
 		8DD76F6C0486A84900D96B5E /* iTrek_0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = iTrek_0; sourceTree = BUILT_PRODUCTS_DIR; };
-		96902BA90EBC963A001AA3AD /* ai.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ai.c; sourceTree = "<group>"; };
-		96902BAA0EBC963A001AA3AD /* battle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = battle.c; sourceTree = "<group>"; };
-		96902BAB0EBC963A001AA3AD /* events.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = events.c; sourceTree = "<group>"; };
-		96902BAC0EBC963A001AA3AD /* finish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = finish.c; sourceTree = "<group>"; };
-		96902BAD0EBC963A001AA3AD /* moving.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = moving.c; sourceTree = "<group>"; };
-		96902BAE0EBC963A001AA3AD /* osx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = osx.c; sourceTree = "<group>"; };
-		96902BAF0EBC963A001AA3AD /* planets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planets.c; sourceTree = "<group>"; };
-		96902BB00EBC963A001AA3AD /* reports.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reports.c; sourceTree = "<group>"; };
-		96902BB10EBC963A001AA3AD /* setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setup.c; sourceTree = "<group>"; };
-		96902BB20EBC963A001AA3AD /* sst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sst.c; sourceTree = "<group>"; };
+		96902BA90EBC963A001AA3AD /* ai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ai.cpp; sourceTree = "<group>"; };
+		96902BAA0EBC963A001AA3AD /* battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = battle.cpp; sourceTree = "<group>"; };
+		96902BAB0EBC963A001AA3AD /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = events.cpp; sourceTree = "<group>"; };
+		96902BAC0EBC963A001AA3AD /* finish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = finish.cpp; sourceTree = "<group>"; };
+		96902BAD0EBC963A001AA3AD /* moving.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moving.cpp; sourceTree = "<group>"; };
+		96902BAE0EBC963A001AA3AD /* osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = osx.cpp; sourceTree = "<group>"; };
+		96902BAF0EBC963A001AA3AD /* planets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = planets.cpp; sourceTree = "<group>"; };
+		96902BB00EBC963A001AA3AD /* reports.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reports.cpp; sourceTree = "<group>"; };
+		96902BB10EBC963A001AA3AD /* setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup.cpp; sourceTree = "<group>"; };
+		96902BB20EBC963A001AA3AD /* sst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sst.cpp; sourceTree = "<group>"; };
 		96902BB30EBC963A001AA3AD /* sst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst.h; sourceTree = "<group>"; };
 		96A5331210E1627300577602 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,16 +73,16 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				96902BA90EBC963A001AA3AD /* ai.c */,
-				96902BAA0EBC963A001AA3AD /* battle.c */,
-				96902BAB0EBC963A001AA3AD /* events.c */,
-				96902BAC0EBC963A001AA3AD /* finish.c */,
-				96902BAD0EBC963A001AA3AD /* moving.c */,
-				96902BAE0EBC963A001AA3AD /* osx.c */,
-				96902BAF0EBC963A001AA3AD /* planets.c */,
-				96902BB00EBC963A001AA3AD /* reports.c */,
-				96902BB10EBC963A001AA3AD /* setup.c */,
-				96902BB20EBC963A001AA3AD /* sst.c */,
+				96902BA90EBC963A001AA3AD /* ai.cpp */,
+				96902BAA0EBC963A001AA3AD /* battle.cpp */,
+				96902BAB0EBC963A001AA3AD /* events.cpp */,
+				96902BAC0EBC963A001AA3AD /* finish.cpp */,
+				96902BAD0EBC963A001AA3AD /* moving.cpp */,
+				96902BAE0EBC963A001AA3AD /* osx.cpp */,
+				96902BAF0EBC963A001AA3AD /* planets.cpp */,
+				96902BB00EBC963A001AA3AD /* reports.cpp */,
+				96902BB10EBC963A001AA3AD /* setup.cpp */,
+				96902BB20EBC963A001AA3AD /* sst.cpp */,
 				96902BB30EBC963A001AA3AD /* sst.h */,
 			);
 			name = Source;
@@ -151,16 +151,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96902BB40EBC963A001AA3AD /* ai.c in Sources */,
-				96902BB50EBC963A001AA3AD /* battle.c in Sources */,
-				96902BB60EBC963A001AA3AD /* events.c in Sources */,
-				96902BB70EBC963A001AA3AD /* finish.c in Sources */,
-				96902BB80EBC963A001AA3AD /* moving.c in Sources */,
-				96902BB90EBC963A001AA3AD /* osx.c in Sources */,
-				96902BBA0EBC963A001AA3AD /* planets.c in Sources */,
-				96902BBB0EBC963A001AA3AD /* reports.c in Sources */,
-				96902BBC0EBC963A001AA3AD /* setup.c in Sources */,
-				96902BBD0EBC963A001AA3AD /* sst.c in Sources */,
+				96902BB40EBC963A001AA3AD /* ai.cpp in Sources */,
+				96902BB50EBC963A001AA3AD /* battle.cpp in Sources */,
+				96902BB60EBC963A001AA3AD /* events.cpp in Sources */,
+				96902BB70EBC963A001AA3AD /* finish.cpp in Sources */,
+				96902BB80EBC963A001AA3AD /* moving.cpp in Sources */,
+				96902BB90EBC963A001AA3AD /* osx.cpp in Sources */,
+				96902BBA0EBC963A001AA3AD /* planets.cpp in Sources */,
+				96902BBB0EBC963A001AA3AD /* reports.cpp in Sources */,
+				96902BBC0EBC963A001AA3AD /* setup.cpp in Sources */,
+				96902BBD0EBC963A001AA3AD /* sst.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

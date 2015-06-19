@@ -243,10 +243,12 @@ EXTERN int
 EXTERN int fromcommandline; // Game start from command line options
 
 
-EXTERN char	passwd[10],		// Self Destruct password
-		*device[ndevice+1];
+EXTERN char	passwd[10];		// Self Destruct password
 
+#ifndef INCLUDED
 EXTERN PLANETS nulplanet;	// zeroed planet structure
+EXTERN char const *device[ndevice+1];
+#endif
 
 EXTERN double
 		kpower[21],		// enemy energy levels
@@ -297,27 +299,6 @@ EXTERN char citem[12];
 #define FSCMOVE 6   // Supercommander moves (might attack base)
 #define FSCDBAS 7   // Supercommander destroys base
 #define FDSPROB 8   // Move deep space probe
-
-#ifdef INCLUDED
-PLANETS nulplanet = {0};
-char *device[ndevice+1] = {
-	"",
-	"S. R. Sensors",
-	"L. R. Sensors",
-	"Phasers",
-	"Photon Tubes",
-	"Life Support",
-	"Warp Engines",
-	"Impulse Engines",
-	"Shields",
-	"Subspace Radio",
-	"Shuttle Craft",
-	"Computer",
-	"Transporter",
-	"Shield Control",
-    "Death Ray",
-    "D. S. Probe"};									
-#endif
 
 #ifndef TRUE
 #define TRUE (1)
@@ -383,8 +364,8 @@ int scan(void);
 void chew(void);
 void chew2(void);
 void skip(int);
-void prout(char *s);
-void proutn(char *s);
+void prout(char const *s);
+void proutn(char const *s);
 void stars(void);
 void newqad(int);
 int ja(void);
@@ -414,8 +395,8 @@ void nova(int, int);
 void snova(int, int);
 void scom(int *);
 void hittem(double *);
-void prouts(char *);
-int isit(char *);
+void prouts(char const *);
+int isit(char const *);
 void preport(void);
 void orbit(void);
 void sensor(void);

@@ -2,6 +2,7 @@
 #include <time.h>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include <unistd.h> // need for read
 
 void randomize(void) {
 	srand((int)time(NULL));
