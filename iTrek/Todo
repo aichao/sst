@@ -1,3 +1,37 @@
+2015-06-18:
+
+1) Need first to convert project to C++11
+
+2) For multi-token commands, we should check the game state before handling
+additional tokens. This is for the commands:
+- move
+- warp
+- impulse
+- shields
+- phasers (consult TestCommandState/phasers_command.cpp for details)
+- photons
+- rest
+- probe
+The checking of game state in the original code is marked by GS_CHECK
+
+3) All output to screen should be replaced by a display event, this includes:
+- reimplementing proutn to create a display event
+- replace all calls to printf, sprintf, and putchar with ostringstream that can 
+  then be used in a call to proutn
+  
+4) Replace scan() with parse() as directed by comments. Modify chew and chew2
+accordingly.
+
+5) All additional inputs other than commands using scan() should be disabled, 
+these include:
+- use of getch() in pause()
+- use of fgets() in helpme() and plaque()
+- use of ja() apart from command parsing in events(), scom(), finish(), beam(),
+shuttle(), usecrystal(), deathray(), and main()
+- use of scan() in dstrct(), eta(), thaw(), choose(). Here, dstrct() and eta()
+should be incorporated in the command state for destruct and computer; thaw() 
+and choose() are outside of the command loop.
+
 Global data structures for Build 001:
 
 Current global variables

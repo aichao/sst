@@ -52,6 +52,7 @@ void sheild(int i) {
 				action = NRG;
 			else {
 				chew();
+        // GS_CHECK
 				if (damage[DSHIELD]) {
 					prout("Shields damaged and down.");
 					return;
@@ -68,6 +69,7 @@ void sheild(int i) {
 				proutn("Energy to transfer to shields- ");
 				action = NRG;
 			}
+      // GS_CHECK
 			else if (damage[DSHIELD]) {
 				prout("Shields damaged and down.");
 				return;
@@ -833,11 +835,13 @@ void photon(void) {
 
 	ididit = 0;
 
+  // GS_CHECK
 	if (damage[DPHOTON]) {
 		prout("Photon tubes damaged.");
 		chew();
 		return;
 	}
+  // GS_CHECK
 	if (torps == 0) {
 		prout("No torpedoes left.");
 		chew();
@@ -1034,23 +1038,28 @@ void phasers(void) {
 
 	skip(1);
 	/* SR sensors and Computer */
+  // GS_CHECK
 	if (damage[DSRSENS]+damage[DCOMPTR] > 0) ipoop = 0;
+  // GS_CHECK
 	if (condit == IHDOCKED) {
 		prout("Phasers can't be fired through base shields.");
 		chew();
 		return;
 	}
+  // GS_CHECK
 	if (damage[DPHASER] != 0) {
 		prout("Phaser control damaged.");
 		chew();
 		return;
 	}
 	if (shldup) {
+    // GS_CHECK
 		if (damage[DSHCTRL]) {
 			prout("High speed shield control damaged.");
 			chew();
 			return;
 		}
+    // GS_CHECK
 		if (energy <= 200.0) {
 			prout("Insufficient energy to activate high-speed shield control.");
 			chew();
@@ -1289,7 +1298,7 @@ void phasers(void) {
 				hits[k] = aaitem;
 				rpow += aaitem;
 				/* If total requested is too much, inform and start over */
-				
+				// GS_CHECK
 				if (rpow >= (ifast?energy-200:energy)) {
 					prout("Available energy exceeded -- try again.");
 					chew();

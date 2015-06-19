@@ -238,6 +238,7 @@ static void getcd(int isprobe, int akey) {
 
 	direc = -1.0;
 	
+  // GS_CHECK
 	if (landed == 1 && !isprobe) {
 		prout("Dummy! You can't leave standard orbit until you");
 		proutn("are back abourt the ");
@@ -247,6 +248,7 @@ static void getcd(int isprobe, int akey) {
 		return;
 	}
 	while (automatic == -1) {
+    // GS_CHECK
 		if (damage[DCOMPTR]) {
 			if (isprobe)
 				prout("Computer damaged; manual navigation only");
@@ -410,6 +412,7 @@ void impuls(void) {
 	double power;
 
 	ididit = 0;
+  // GS_CHECK
 	if (damage[DIMPULS]) {
 		chew();
 		skip(1);
@@ -442,6 +445,7 @@ void impuls(void) {
 		return;
 	}
 	/* Make sure enough time is left for the trip */
+  // GS_CHECK
 	Time = dist/0.095;
 	if (Time >= d.remtime) {
 		prout("First Officer Spock- \"Captain, our speed under impulse");
@@ -467,12 +471,14 @@ void warp(int i) {
 
 	if (i!=2) { /* Not WARPX entry */
 		ididit = 0;
+    // GS_CHECK
 		if (damage[DWARPEN] > 10.0) {
 			chew();
 			skip(1);
 			prout("Engineer Scott- \"The impulse engines are damaged, Sir.\"");
 			return;
 		}
+    // GS_CHECK
 		if (damage[DWARPEN] > 0.0 && warpfac > 4.0) {
 			chew();
 			skip(1);
@@ -514,6 +520,7 @@ void warp(int i) {
 		}
 						
 		/* Make sure enough time is left for the trip */
+    // GS_CHECK
 		Time = 10.0*dist/wfacsq;
 		if (Time >= 0.8*d.remtime) {
 			skip(1);
@@ -609,10 +616,12 @@ void setwrp(void) {
 		huh();
 		return;
 	}
+  // GS_CHECK
 	if (damage[DWARPEN] > 10.0) {
 		prout("Warp engines inoperative.");
 		return;
 	}
+  // GS_CHECK
 	if (damage[DWARPEN] > 0.0 && aaitem > 4.0) {
 		prout("Engineer Scott- \"I'm doing my best, Captain,\n"
 			  "  but right now we can only go warp 4.\"");
@@ -807,6 +816,7 @@ void probe(void) {
 	double angle, bigger;
 	int key;
 	/* New code to launch a deep space probe */
+  // GS_CHECK
 	if (nprobes == 0) {
 		chew();
 		skip(1);
@@ -816,12 +826,14 @@ void probe(void) {
 			prout("Ye Faerie Queene has no deep space probes.");
 		return;
 	}
+  // GS_CHECK
 	if (damage[DDSP] != 0.0) {
 		chew();
 		skip(1);
 		prout("Engineer Scott- \"The probe launcher is damaged, Sir.\"");
 		return;
 	}
+  // GS_CHECK
 	if (future[FDSPROB] != 1e30) {
 		chew();
 		skip(1);

@@ -374,6 +374,7 @@ void waiting(void) {
 	}
 	origTime = delay = aaitem;
 	if (delay <= 0.0) return;
+  // GS_CHECK
 	if (delay >= d.remtime || nenhere != 0) {
 		prout("Are you sure? ");
 		if (ja() == 0) return;
