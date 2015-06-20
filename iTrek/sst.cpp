@@ -745,13 +745,15 @@ void prout(char const *s) {
 }
 
 void prouts(char const *s) {
+  char buf[16];
+  buf[1] = '\0';
 	clock_t endTime;
 	/* print slowly! */
 	while (*s) {
 		endTime = clock() + CLOCKS_PER_SEC*0.05;
 		while (clock() < endTime) ;
-    char next_c = *s++;
-    std::string out(&next_c);
+    buf[0] = *s++;
+    std::string out(buf);
     proutn(out.c_str());
 //		putchar(*s++);
     // @todo: can disable this when we reimplement proutn to post display
