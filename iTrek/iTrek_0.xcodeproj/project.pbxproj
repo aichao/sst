@@ -47,6 +47,7 @@
 		96902BB20EBC963A001AA3AD /* sst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sst.cpp; sourceTree = "<group>"; };
 		96902BB30EBC963A001AA3AD /* sst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst.h; sourceTree = "<group>"; };
 		96A5331210E1627300577602 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
+		96EEFB661B349C330051781B /* osx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = osx.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,7 @@
 				96902BB10EBC963A001AA3AD /* setup.cpp */,
 				96902BB20EBC963A001AA3AD /* sst.cpp */,
 				96902BB30EBC963A001AA3AD /* sst.h */,
+				96EEFB661B349C330051781B /* osx.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

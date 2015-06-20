@@ -1,9 +1,9 @@
 #include <time.h>
 #include "sst.h"
 
-// defined in osx.c
-void randomize(void);
-int min(int, int);
+#include <sstream>
+
+#include "osx.h"
 
 void prelim(void) {
 	skip(2);
@@ -286,7 +286,7 @@ void setup(void) {
 	}
 	// Position ordinary Klingon Battle Cruisers
 	krem = inkling - incom - d.nscrem;
-	klumper = 0.25*skill*(9.0-length)+1.0;
+	klumper = 0.25*skill*(9.0-glen)+1.0;
 	if (klumper > 9) klumper = 9; // Can't have more than 9 in quadrant
 	do {
 		double r = Rand();
@@ -362,6 +362,20 @@ void setup(void) {
 	d.snap = 0;
 		
 	if (skill == 1) {
+    std::ostringstream oss;
+    oss << "It is stardate " << (int)d.date
+        << ". The Federation is being attacked by\n"
+        << "a deadly Klingon invasion force. As captain of the United\n"
+        << "Starship U.S.S. Enterprise, it is your mission to seek out\n"
+        << "and destroy this invasion force of " << inkling
+        << " battle cruisers.\n"
+        << "You have an initial allotment of " << (int)intime
+        << " stardates to complete\n"
+        << "your mission.  As you proceed you may be given more time.\n\n"
+        << "You will have " << inbase << " supporting starbases.\n"
+        << "Starbase locations-  ";
+    proutn(oss.str().c_str());
+    /*
 		printf("It is stardate %d. The Federation is being attacked by\n",
 			   (int)d.date);
 		printf("a deadly Klingon invasion force. As captain of the United\n"
@@ -373,13 +387,24 @@ void setup(void) {
 			   "You will have %d supporting starbases.\n"
 			   "Starbase locations-  ",
 			   (int)intime, inbase);
+    */
 	}
 	else {
+    std::ostringstream oss;
+    oss << "Stardate " << (int)d.date << ".\n\n" << inkling
+        << " Klingons.\n An unknown number of Romulans\n";
+    /*
 		printf("Stardate %d.\n\n"
 			   "%d Klingons.\nAn unknown number of Romulans\n",
 			   (int)d.date, inkling);
-		if (d.nscrem) printf("and one (GULP) Super-Commander.\n");
-		printf("%d stardates\n%d starbases in  ",(int)intime, inbase);
+    */
+		if (d.nscrem) {
+      oss << "and one (GULP) Super-Commander.\n";
+//      printf("and one (GULP) Super-Commander.\n");
+    }
+    oss << (int)intime << " stardates\n" << inbase << " starbases in  ";
+//		printf("%d stardates\n%d starbases in  ",(int)intime, inbase);
+    proutn(oss.str().c_str());
 	}
 	for (i = 1; i <= inbase; i++) {
 		cramlc(0, d.baseqx[i], d.baseqy[i]);
@@ -403,7 +428,7 @@ int choose(void) {
 	tourn = 0;
 	thawed = 0;
 	skill = 0;
-	length = 0;
+	glen = 0;
 	while (TRUE) {
 		if (fromcommandline) /* Can start with command line options */
 			fromcommandline = 0;
@@ -445,11 +470,11 @@ int choose(void) {
 		prout("\"?");
 		chew();
 	}
-	while (length==0 || skill==0) {
+	while (glen==0 || skill==0) {
 		if (scan() == IHALPHA) {
-			if (isit("short")) length = 1;
-			else if (isit("medium")) length = 2;
-			else if (isit("long")) length = 4;
+			if (isit("short")) glen = 1;
+			else if (isit("medium")) glen = 2;
+			else if (isit("long")) glen = 4;
 			else if (isit("novice")) skill = 1;
 			else if (isit("fair")) skill = 2;
 			else if (isit("good")) skill = 3;
@@ -463,7 +488,7 @@ int choose(void) {
 		}
 		else {
 			chew();
-			if (length==0) proutn("Would you like a Short, Medium, or Long game? ");
+			if (glen==0) proutn("Would you like a Short, Medium, or Long game? ");
 			else if (skill == 0) proutn("Are you a Novice, Fair, Good, Expert, or Emeritus player?");
 		}
 	}
@@ -485,7 +510,7 @@ int choose(void) {
 	inplan = (PLNETMAX/2) + (PLNETMAX/2+1)*Rand();
 	d.nromrem = (2.0+Rand())*skill;
 	d.nscrem = (skill > 2? 1 : 0);
-	d.remtime = 7.0 * length;
+	d.remtime = 7.0 * glen;
 	intime = d.remtime;
 	d.remkl = 2.0*intime*((skill+1 - 2*Rand())*skill*0.1+.15);
 	inkling = d.remkl;

@@ -8,6 +8,8 @@
 #define EXTERN
 #endif
 
+#include <string>
+
 // #define DEBUG
 
 #define ndevice (15)	// Number of devices
@@ -159,7 +161,7 @@ EXTERN struct foo2 {
 #define quady a.quady			//
 #define sectx a.sectx			// where we are
 #define secty a.secty			//
-#define length a.length			// length of game
+#define glen a.length			// length of game
 #define skill a.skill			// skill level
 #define basex a.basex			// position of base in current quad
 #define basey a.basey			//
@@ -409,3 +411,4 @@ void debugme(void);
 void attakreport(void);
 void movetho(void);
 void probe(void);
+std::string get_ship();

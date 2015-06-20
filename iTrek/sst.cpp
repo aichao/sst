@@ -6,9 +6,10 @@
 #endif
 #include <time.h>
 
-// functions defined in osx.c
-int max(int, int);
-int getch(void);
+#include <sstream>
+#include <iomanip>
+
+#include "osx.h"
 
 static char line[128], *linep = line;
 static int linecount;	/* for paging */
@@ -380,7 +381,6 @@ static void makemoves(void) {
 	} // end command loop
 }
 
-
 int main(int argc, char **argv) {
 	int i;
 	int hitme;
@@ -410,13 +410,13 @@ int main(int argc, char **argv) {
 		skip(1);
 
 		if (tourn && alldone) {
-			printf("Do you want your score recorded?");
+			proutn("Do you want your score recorded? ");
 			if (ja()) {
 				chew2();
 				freeze(FALSE);
 			}
 		}
-		printf("Do you want to play again?");
+		proutn("Do you want to play again? ");
 		if (!ja()) break;
 	}
 	skip(1);
@@ -674,15 +674,19 @@ int ja(void) {
 }
 
 void cramf(double x, int w, int d) {
-	char buf[64];
-	sprintf(buf, "%*.*f", w, d, x);
-	proutn(buf);
+  std::ostringstream oss;
+  oss << std::fixed << std::setw(w) << std::setprecision(d) << x;
+//	char buf[64];
+//	sprintf(buf, "%*.*f", w, d, x);
+	proutn(oss.str().c_str());
 }
 
 void crami(int i, int w) {
-	char buf[16];
-	sprintf(buf, "%*d", w, i);
-	proutn(buf);
+  std::ostringstream oss;
+  oss << std::setw(w) << i;
+//	char buf[16];
+//	sprintf(buf, "%*d", w, i);
+	proutn(oss.str().c_str());
 }
 
 double square(double i) { return i*i; }
@@ -695,7 +699,8 @@ static void clearscreen(void) {
 /* We will pull these out in case we want to do something special later */
 
 void pause(int i) {
-	putchar('\n');
+  proutn("\n");
+//	putchar('\n');
 	if (i==1) {
 		if (skill > 2)
 			prout("[ANOUNCEMENT ARRIVING...]");
@@ -724,7 +729,8 @@ void skip(int i) {
 		if (linecount >= 23)
 			pause(0);
 		else
-			putchar('\n');
+      proutn("\n");
+//			putchar('\n');
 	}
 }
 
@@ -744,7 +750,12 @@ void prouts(char const *s) {
 	while (*s) {
 		endTime = clock() + CLOCKS_PER_SEC*0.05;
 		while (clock() < endTime) ;
-		putchar(*s++);
+    char next_c = *s++;
+    std::string out(&next_c);
+    proutn(out.c_str());
+//		putchar(*s++);
+    // @todo: can disable this when we reimplement proutn to post display
+    // event which will always flush
 		fflush(stdout);
 	}
 }
@@ -761,6 +772,16 @@ int isit(char const *s) {
 
 	return strncmp(s, citem, max(1, strlen(citem))) == 0;
 
+}
+
+std::string get_ship() {
+  std::string s;
+	switch (ship) {
+		case IHE: s = "Enterprise"; break;
+		case IHF: s = "Faerie Queene"; break;
+		default:  s = "Ship???"; break;
+	}
+	return s;
 }
 
 #ifdef DEBUG
@@ -825,6 +846,5 @@ void debugme(void) {
 		chew();
 	}
 }
-			
 
 #endif

@@ -1,7 +1,7 @@
 2015-06-18:
 
 1) Need first to convert project to C++11
-
+-> Done.
 2) For multi-token commands, we should check the game state before handling
 additional tokens. This is for the commands:
 - move
@@ -15,10 +15,11 @@ additional tokens. This is for the commands:
 The checking of game state in the original code is marked by GS_CHECK
 
 3) All output to screen should be replaced by a display event, this includes:
-- reimplementing proutn to create a display event
-- replace all calls to printf, sprintf, and putchar with ostringstream that can 
+- replace all calls to printf, sprintf, and putchar with ostringstream that can
   then be used in a call to proutn
-  
+-> Done.
+- reimplementing proutn to create a display event
+
 4) Replace scan() with parse() as directed by comments. Modify chew and chew2
 accordingly.
 

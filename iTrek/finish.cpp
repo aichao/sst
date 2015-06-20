@@ -1,6 +1,10 @@
 #include "sst.h"
 #include <string.h>
 #include <time.h>
+#include "osx.h"
+
+#include <sstream>
+#include <iomanip>
 
 void dstrct() {
 	/* Finish with a BANG! */
@@ -67,14 +71,22 @@ void kaboom(void) {
 void finish(FINTYPE ifin) {
 	int igotit = 0;
 	alldone = 1;
-	skip(3);
-	printf("It is stardate %.1f .\n\n", d.date);
+  std::stringstream oss;
+  oss << "\n\n\nIt is stardate "<< format_float(d.date, 0, 1) << " .\n\n";
+  proutn(oss.str().c_str());
+//	skip(3);
+//	printf("It is stardate %.1f .\n\n", d.date);
 	switch (ifin) {
 		case FWON: // Game has been won
-			if (d.nromrem != 0)
-				printf("The remaining %d Romulans surrender to Starfleet Command.\n",
-					   d.nromrem);
-			
+			if (d.nromrem != 0) {
+        // clear the oss
+        oss.str(std::string());
+        oss << "The remaining " << d.nromrem
+            << " Romulans surrender to Starfleet Command.\n";
+        proutn(oss.str().c_str());
+//				printf("The remaining %d Romulans surrender to Starfleet Command.\n",
+//					   d.nromrem);
+      }
 			prout("You have smashed the Klingon invasion fleet and saved");
 			prout("the Federation.");
 			gamewon=1;
@@ -322,46 +334,100 @@ void score(void) {
 			 - 100*d.basekl - 100*klship - 45*nhelp -5*d.starkl - casual
 			 + 20*d.nromkl + 200*d.nsckill - 10*d.nplankl + d.nromrem;
 	if (alive == 0) iscore -= 200;
-	skip(2);
-	prout("Your score --");
+  std::stringstream oss;
+  oss << "\n\nYour score --\n";
+//	skip(2);
+//	prout("Your score --");
 	if (d.nromkl)
-		printf("%6d Romulans destroyed                 %5d\n",
-			   d.nromkl,20*d.nromkl);
+    oss << format_int(d.nromkl, 6)
+        << " Romulans destroyed                 "
+        << format_int(20*d.nromkl, 5) << '\n';
+//		printf("%6d Romulans destroyed                 %5d\n",
+//			   d.nromkl,20*d.nromkl);
 	if (d.nromrem)
-		printf("%6d Romulans captured                  %5d\n",
-			   d.nromrem, d.nromrem);
+    oss << format_int(d.nromrem, 6)
+        << " Romulans captured                  "
+        << format_int(d.nromrem, 5) << '\n';
+//		printf("%6d Romulans captured                  %5d\n",
+//			   d.nromrem, d.nromrem);
 	if (d.killk)
-		printf("%6d ordinary Klingons destroyed        %5d\n",
-			   d.killk, 10*d.killk);
+    oss << format_int(d.killk, 6)
+        << " ordinary Klingons destroyed        "
+        << format_int(10*d.killk, 5) << '\n';
+//		printf("%6d ordinary Klingons destroyed        %5d\n",
+//			   d.killk, 10*d.killk);
 	if (d.killc)
-		printf("%6d Klingon commanders destroyed       %5d\n",
-			   d.killc, 50*d.killc);
+    oss << format_int(d.killc, 6)
+        << " Klingon commanders destroyed       "
+        << format_int(50*d.killc, 5) << '\n';
+//		printf("%6d Klingon commanders destroyed       %5d\n",
+//			   d.killc, 50*d.killc);
 	if (d.nsckill)
-		printf("%6d Super-Commander destroyed          %5d\n",
-			   d.nsckill, 200*d.nsckill);
+    oss << format_int(d.nsckill, 6)
+        << " Super-Commander destroyed          "
+        << format_int(200*d.nsckill, 5) << '\n';
+//		printf("%6d Super-Commander destroyed          %5d\n",
+//			   d.nsckill, 200*d.nsckill);
 	if (ithperd)
-		printf("%6.2f Klingons per stardate              %5d\n",
-			   perdate, ithperd);
+    oss << format_float(perdate, 6, 2)
+        << " Klingons per stardate              "
+        << format_int(ithperd, 5) << '\n';
+//		printf("%6.2f Klingons per stardate              %5d\n",
+//			   perdate, ithperd);
 	if (d.starkl)
-		printf("%6d stars destroyed by your action     %5d\n",
-			   d.starkl, -5*d.starkl);
+    oss << format_int(d.starkl, 6)
+        << " stars destroyed by your action     "
+        << format_int(-5*d.starkl, 5) << '\n';
+//		printf("%6d stars destroyed by your action     %5d\n",
+//			   d.starkl, -5*d.starkl);
 	if (d.nplankl)
-		printf("%6d planets destroyed by your action   %5d\n",
-			   d.nplankl, -10*d.nplankl);
+    oss << format_int(d.nplankl, 6)
+        << " planets destroyed by your action   "
+        << format_int(-10*d.nplankl, 5) << '\n';
+//		printf("%6d planets destroyed by your action   %5d\n",
+//			   d.nplankl, -10*d.nplankl);
 	if (d.basekl)
-		printf("%6d bases destroyed by your action     %5d\n",
-			   d.basekl, -100*d.basekl);
+    oss << format_int(d.basekl, 6)
+        << " bases destroyed by your action     "
+        << format_int(-100*d.basekl, 5) << '\n';
+//		printf("%6d bases destroyed by your action     %5d\n",
+//			   d.basekl, -100*d.basekl);
 	if (nhelp)
-		printf("%6d calls for help from starbase       %5d\n",
-			   nhelp, -45*nhelp);
+    oss << format_int(nhelp, 6)
+        << " calls for help from starbase       "
+        << format_int(-45*nhelp, 5) << '\n';
+//		printf("%6d calls for help from starbase       %5d\n",
+//			   nhelp, -45*nhelp);
 	if (casual)
-		printf("%6d casualties incurred                %5d\n",
-			   casual, -casual);
+    oss << format_int(casual, 6)
+        << " casualties incurred                "
+        << format_int(-casual, 5) << '\n';
+//		printf("%6d casualties incurred                %5d\n",
+//			   casual, -casual);
 	if (klship)
-		printf("%6d ship(s) lost or destroyed          %5d\n",
-			   klship, -100*klship);
+    oss << format_int(klship, 6)
+        << " ship(s) lost or destroyed          "
+        << format_int(-100*klship, 5) << '\n';
+//		printf("%6d ship(s) lost or destroyed          %5d\n",
+//			   klship, -100*klship);
 	if (alive==0)
-		prout("Penalty for getting yourself killed        -200");
+    oss << "Penalty for getting yourself killed        -200\n";
+//		prout("Penalty for getting yourself killed        -200");
+	if (gamewon) {
+    oss << "\nBonus for winning ";
+		switch (skill) {
+			case 1: oss << "Novice game  "; break;
+			case 2: oss << "Fair game    "; break;
+			case 3: oss << "Good game    "; break;
+			case 4: oss << "Expert game  "; break;
+			case 5: oss << "Emeritus game"; break;
+		}
+    oss << "           " << format_int(iwon, 5) << '\n';
+	}
+  oss << "\n\nTOTAL SCORE                               "
+      << format_int(iscore, 5) << '\n';
+  proutn(oss.str().c_str());
+  /*
 	if (gamewon) {
 		skip(1);
 		proutn("Bonus for winning ");
@@ -376,6 +442,7 @@ void score(void) {
 	}
 	skip(2);
 	printf("TOTAL SCORE                               %5d\n", iscore);
+  */
 }
 
 void plaque(void) {
@@ -388,16 +455,16 @@ void plaque(void) {
 	skip(2);
 	
 	while (fp == NULL) {
-		printf("File or device name for your plaque:");
+		proutn("File or device name for your plaque: ");
 		fgets(winner, 128, stdin);
 		winner[strlen(winner)-1] = '\0';
 		fp = fopen(winner, "w");
 		if (fp==NULL) {
-			printf("Invalid name.\n");
+			proutn("Invalid name.\n");
 		}
 	}
 
-	printf("Enter name to go on plaque (up to 30 characters):");
+	proutn("Enter name to go on plaque (up to 30 characters): ");
 	fgets(winner, 128, stdin);
 	winner[strlen(winner)-1] = '\0';
 	winner[30] = '\0';

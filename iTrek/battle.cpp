@@ -1,5 +1,8 @@
 #include "sst.h"
 
+#include <sstream>
+#include <iomanip>
+
 /** Shields: there are two ways to call this function:
  *  1) i = 2: result in the action to raise shields. No
  *     further inputs are requested.
@@ -572,7 +575,10 @@ void attack(int k) {
 		if (hit > hitmax) hitmax = hit;
 		hittot += hit;
 		fry(hit);
-		printf("Hit %g energy %g\n", hit, energy);
+    std::ostringstream oss;
+    oss << "Hit " << hit << " energy " << energy << '\n';
+    proutn(oss.str().c_str());
+//		printf("Hit %g energy %g\n", hit, energy);
 		energy -= hit;
 	}
 	if (energy <= 0) {

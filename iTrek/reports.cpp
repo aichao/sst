@@ -2,9 +2,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include "osx.h"
 
-// defined in osx.c
-int min(int, int);
+#include <sstream>
 
 void attakreport(void) {
 	if (future[FCDBAS] < 1e30) {
@@ -31,7 +31,7 @@ void report(int f) {
 
 	chew();
 	s1 = (thawed?"thawed ":"");
-	switch (length) {
+	switch (glen) {
 		case 1: s2="short"; break;
 		case 2: s2="medium"; break;
 		case 4: s2="long"; break;
@@ -45,6 +45,29 @@ void report(int f) {
 		case 5: s3="emeritus"; break;
 		default: s3="skilled"; break;
 	}
+  std::ostringstream oss;
+  oss << "\nYou " << (alldone ? "were": "are now")
+      << " playing a " << s1 << s2 << " " << s3 << " game.\n";
+	if (skill>3 && thawed && !alldone) oss << "No plaque is allowed.\n";
+	if (tourn) oss << "This is tournament game " << tourn << ".\n";
+	if (f) oss << "Your secret password is \"" << passwd << "\"\n";
+  oss << (d.killk+d.killc+d.nsckill) << " of " << inkling
+      << " Klingons have been killed";
+	if (d.killc) oss << ", including " << d.killc
+                   << " Commander" << (d.killc == 1 ? "" : "s") << ".\n";
+	else if (d.killk+d.nsckill > 0) oss << ", but no Commanders.\n";
+	else oss << ".\n";
+	if (skill > 2) oss << "The Super Commander has " << (d.nscrem ? "not " : "")
+                     << "been destroyed.\n";
+	if (d.rembase != inbase) {
+		oss << "There ";
+		if (inbase-d.rembase==1) oss << "has been 1 base";
+		else {
+			oss << "have been " << format_int(inbase-d.rembase, 1) << " bases";
+		}
+		oss << " destroyed, " << format_int(d.rembase, 1) << " remaining.\n";
+	} else oss << "There are " << inbase << " bases.\n";
+  /*
 	printf("\nYou %s playing a %s%s %s game.\n",
 		   alldone? "were": "are now", s1, s2, s3);
 	if (skill>3 && thawed && !alldone) prout("No plaque is allowed.");
@@ -70,12 +93,53 @@ void report(int f) {
 		prout(" remaining.");
 	}
 	else printf("There are %d bases.\n", inbase);
+  */
+  proutn(oss.str().c_str());
 	if (damage[DRADIO] == 0.0 || condit == IHDOCKED || iseenit) {
 		/* Don't report this if not seen and
 			either the radio is dead or not at base! */
 		attakreport();
 		iseenit = 1;
 	}
+  // clear the oss
+  oss.str(std::string());
+	if (casual) oss << casual << " casualt" << (casual == 1 ? "y" : "ies")
+                  << " suffered so far.\n";
+	if (nhelp) oss << "There were " << nhelp << " call" << (nhelp == 1 ? "" : "s")
+                 << " for help.\n";
+	if (ship == IHE) {
+		oss << "You have ";
+		if (nprobes) oss << format_int(nprobes, 1);
+		else oss << "no";
+		oss << " deep space probe";
+		if (nprobes!=1) oss << "s";
+		oss << ".\n";
+	}
+	if ((damage[DRADIO] == 0.0 || condit == IHDOCKED)&&
+      future[FDSPROB] != 1e30) {
+		if (isarmed)
+			oss << "An armed deep space probe is in";
+		else
+			oss << "A deep space probe is in";
+		oss << format_coordinate(1, probecx, probecy) << ".\n";
+	}
+	if (icrystl) {
+		if (cryprob <= .05)
+			oss << "Dilithium crystals aboard ship...not yet used.\n";
+		else {
+			int i=0;
+			double ai = 0.05;
+			while (cryprob > ai) {
+				ai *= 2.0;
+				i++;
+			}
+			oss << "Dilithium crystals have been used " << i
+          << " time" << (i == 1 ? "" : "s") << ".\n";
+		}
+	}
+	oss << '\n';
+  proutn(oss.str().c_str());
+  /*
 	if (casual) printf("%d casualt%s suffered so far.\n",
 					   casual, casual==1? "y" : "ies");
 	if (nhelp) printf("There were %d call%s for help.\n",
@@ -112,6 +176,7 @@ void report(int f) {
 		}
 	}
 	skip(1);
+  */
 }
 	
 void lrscan(void) {
@@ -130,55 +195,78 @@ void lrscan(void) {
 		skip(1);
 		proutn("Long-range scan for");
 	}
-	cramlc(1, quadx, quady);
-	skip(1);
+  std::ostringstream oss;
+  oss << format_coordinate(1, quadx, quady) << '\n';
+//	cramlc(1, quadx, quady);
+//	skip(1);
 	for (x = quadx-1; x <= quadx+1; x++) {
 		for (y = quady-1; y <= quady+1; y++) {
 			if (x == 0 || x > 8 || y == 0 || y > 8)
-				printf("   -1");
+        oss << "   -1";
+//				printf("   -1");
 			else {
-				printf("%5d", d.galaxy[x][y]);
+        oss << format_int(d.galaxy[x][y], 5);
+//				printf("%5d", d.galaxy[x][y]);
 				starch[x][y] = damage[DRADIO] > 0 ? d.galaxy[x][y]+1000 :1;
 			}
 		}
-		putchar('\n');
+    oss << '\n';
+//		putchar('\n');
 	}
-
+  proutn(oss.str().c_str());
 }
 
 void dreprt(void) {
 	int jdam = FALSE, i;
 	chew();
 
+  std::ostringstream oss;
 	for (i = 1; i <= ndevice; i++) {
 		if (damage[i] > 0.0) {
 			if (!jdam) {
+        oss << "\nDEVICE            -REPAIR TIMES-\n"
+            << "                IN FLIGHT   DOCKED\n";
+        /*
 				skip(1);
 				prout("DEVICE            -REPAIR TIMES-");
 				prout("                IN FLIGHT   DOCKED");
+        */
 				jdam = TRUE;
 			}
+      oss << "  " << fixed_width_string(device[i], 16) << " "
+          << format_float(damage[i]+0.05, 8, 2) << "  "
+          << format_float(docfac*damage[i]+0.005, 8, 2) << '\n';
+      /*
 			printf("  %16s ", device[i]);
 			cramf(damage[i]+0.05, 8, 2);
 			proutn("  ");
 			cramf(docfac*damage[i]+0.005, 8, 2);
 			skip(1);
+      */
 		}
 	}
-	if (!jdam) prout("All devices functional.");
+	if (!jdam) oss << "All devices functional.\n";
+  proutn(oss.str().c_str());
 }
 
 void chart(int nn) {
 	int i,j;
 
 	chew();
-	skip(1);
+  std::ostringstream oss;
+  oss << '\n';
+//	skip(1);
 	if (stdamtim != 1e30 && stdamtim != d.date && condit == IHDOCKED) {
+    oss << "Spock-  \"I revised the Star Chart from the\n"
+        << "  starbase's records.\"\n\n";
+    /*
 		prout("Spock-  \"I revised the Star Chart from the");
 		prout("  starbase's records.\"");
 		skip(1);
+    */
 	}
-	if (nn == 0) prout("STAR CHART FOR THE KNOWN GALAXY");
+	if (nn == 0) oss << "STAR CHART FOR THE KNOWN GALAXY\n";
+//	if (nn == 0) prout("STAR CHART FOR THE KNOWN GALAXY");
 	if (stdamtim != 1e30) {
 		if (condit == IHDOCKED) {
 			/* We are docked, so restore chart from base information */
@@ -188,13 +276,41 @@ void chart(int nn) {
 					if (starch[i][j] == 1) starch[i][j] = d.galaxy[i][j]+1000;
 		}
 		else {
+      oss << "(Last surveillance update " << format_float(d.date-stdamtim, 0, 1)
+          << " stardates ago.)\n";
+      /*
 			proutn("(Last surveillance update ");
 			cramf(d.date-stdamtim, 0, 1);
 			prout(" stardates ago.)");
+      */
 		}
 	}
-	if (nn ==0) skip(1);
+  if (nn == 0) oss << '\n';
+//	if (nn ==0) skip(1);
 
+  oss << "      1    2    3    4    5    6    7    8\n"
+      << "    ----------------------------------------\n";
+	if (nn==0) oss << "  -\n";
+	for (i = 1; i <= 8; i++) {
+    oss << i << " -";
+		for (j = 1; j <= 8; j++) {
+			if (starch[i][j] < 0)
+				oss << "  .1.";
+			else if (starch[i][j] == 0)
+				oss << "  ...";
+			else if (starch[i][j] > 999)
+				oss << format_int(starch[i][j]-1000, 5);
+			else
+				oss << format_int(d.galaxy[i][j], 5);
+		}
+		oss << "  -\n";
+	}
+	if (nn == 0) {
+    oss << '\n' << get_ship() << " is currently in"
+        << format_coordinate(1, quadx, quady) << '\n';
+	}
+  proutn(oss.str().c_str());
+  /*
 	prout("      1    2    3    4    5    6    7    8");
 	prout("    ----------------------------------------");
 	if (nn==0) prout("  -");
@@ -219,6 +335,7 @@ void chart(int nn) {
 		cramlc(1, quadx, quady);
 		skip(1);
 	}
+  */
 }
 		
 		
@@ -250,7 +367,7 @@ void srscan(int l) {
 			break;
 		case 2: // REQUEST
 			while (scan() == IHEOL)
-				printf("Information desired? ");
+				proutn("Information desired? ");
 			chew();
 			for (k = 1; k <= 10; k++)
 				if (strncmp(citem,requests[k],min(2,strlen(citem)))==0)
@@ -267,21 +384,26 @@ void srscan(int l) {
 			leftside = FALSE;
 			skip(1);
 	}
+  std::ostringstream oss;
 	for (i = 1; i <= 10; i++) {
 		int jj = (k!=0 ? k : i);
 		if (leftside) {
-			printf("%2d  ", i);
+      oss << format_int(i, 2) << "  ";
+//			printf("%2d  ", i);
 			for (j = 1; j <= 10; j++) {
 				if (goodScan || (abs(i-sectx)<= 1 && abs(j-secty) <= 1))
-					printf("%c ",quad[i][j]);
+          oss << quad[i][j] << " ";
+//					printf("%c ",quad[i][j]);
 				else
-					printf("- ");
+          oss << "- ";
+//					printf("- ");
 			}
 		}
 		if (rightside) {
 			switch (jj) {
 				case 1:
-					printf(" Stardate      %.1f", d.date);
+          oss << " Stardate      " << format_float(d.date, 0, 1);
+//					printf(" Stardate      %.1f", d.date);
 					break;
 				case 2:
 					if (condit != IHDOCKED) newcnd();
@@ -291,57 +413,79 @@ void srscan(int l) {
 						case IHYELLOW: cp = "YELLOW"; break;
 						case IHDOCKED: cp = "DOCKED"; break;
 					}
-					printf(" Condition     %s", cp);
+          oss << " Condition     " << cp;
+//					printf(" Condition     %s", cp);
 					break;
 				case 3:
+          oss << " Position     " << format_coordinate(0, quadx, quady)
+              << ',' << format_coordinate(0, sectx, secty);
+          /*
 					printf(" Position     ");
 					cramlc(0, quadx, quady);
 					putchar(',');
 					cramlc(0, sectx, secty);
+          */
 					break;
 				case 4:
-					printf(" Life Support  ");
+          oss << " Life Support  ";
+//					printf(" Life Support  ");
 					if (damage[DLIFSUP] != 0.0) {
 						if (condit == IHDOCKED)
-							printf("DAMAGED, supported by starbase");
+              oss << "DAMAGED, supported by starbase";
+//							printf("DAMAGED, supported by starbase");
 						else
-							printf("DAMAGED, reserves=%4.2f", lsupres);
+              oss << "DAMAGED, reserves=" << format_float(lsupres, 4, 2);
+//							printf("DAMAGED, reserves=%4.2f", lsupres);
 					}
 					else
-						printf("ACTIVE");
+            oss << "ACTIVE";
+//						printf("ACTIVE");
 					break;
 				case 5:
-					printf(" Warp Factor   %.1f", warpfac);
+          oss << " Warp Factor   " << format_float(warpfac, 0, 1);
+//					printf(" Warp Factor   %.1f", warpfac);
 					break;
 				case 6:
-					printf(" Energy        %.2f", energy);
+          oss << " Energy        " << format_float(energy, 0, 2);
+//					printf(" Energy        %.2f", energy);
 					break;
 				case 7:
-					printf(" Torpedoes     %d", torps);
+          oss << " Torpedoes     " << torps;
+//					printf(" Torpedoes     %d", torps);
 					break;
 				case 8:
-					printf(" Shields       ");
+          oss << " Shields       ";
+//					printf(" Shields       ");
 					if (damage[DSHIELD] != 0)
-						printf("DAMAGED,");
+            oss << "DAMAGED,";
+//						printf("DAMAGED,");
 					else if (shldup)
-						printf("UP,");
+            oss << "UP,";
+//						printf("UP,");
 					else
-						printf("DOWN,");
-					printf(" %d%% %.1f units",
-						   (int)((100.0*shield)/inshld + 0.5), shield);
+            oss << "DOWN,";
+//						printf("DOWN,");
+          oss << " " << (int)((100.0*shield)/inshld + 0.5) << "% "
+              << format_float(shield, 0, 1) << " units";
+//					printf(" %d%% %.1f units",
+//						   (int)((100.0*shield)/inshld + 0.5), shield);
 					break;
 				case 9:
-					printf(" Klingons Left %d", d.remkl);
+          oss << " Klingons Left " << d.remkl;
+//					printf(" Klingons Left %d", d.remkl);
 					break;
 				case 10:
-					printf(" Time Left     %.2f", d.remtime);
+          oss << " Time Left     " << format_float(d.remtime, 0, 2);
+//					printf(" Time Left     %.2f", d.remtime);
 					break;
 			}
 					
 		}
-		skip(1);
+    oss << '\n';
+//		skip(1);
 		if (k!=0) return;
 	}
+  proutn(oss.str().c_str());
 	if (nn) chart(1);
 }
 			
