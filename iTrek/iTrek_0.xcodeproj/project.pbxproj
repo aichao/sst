@@ -7,47 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* iTrek_0.1 */; };
-		96902BB40EBC963A001AA3AD /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.c */; };
-		96902BB50EBC963A001AA3AD /* battle.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.c */; };
-		96902BB60EBC963A001AA3AD /* events.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.c */; };
-		96902BB70EBC963A001AA3AD /* finish.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAC0EBC963A001AA3AD /* finish.c */; };
-		96902BB80EBC963A001AA3AD /* moving.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAD0EBC963A001AA3AD /* moving.c */; };
-		96902BB90EBC963A001AA3AD /* osx.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAE0EBC963A001AA3AD /* osx.c */; };
-		96902BBA0EBC963A001AA3AD /* planets.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAF0EBC963A001AA3AD /* planets.c */; };
-		96902BBB0EBC963A001AA3AD /* reports.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB00EBC963A001AA3AD /* reports.c */; };
-		96902BBC0EBC963A001AA3AD /* setup.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB10EBC963A001AA3AD /* setup.c */; };
-		96902BBD0EBC963A001AA3AD /* sst.c in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB20EBC963A001AA3AD /* sst.c */; };
+		960AD4A31B2E067A0046C899 /* iTrek_0 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DD76F6C0486A84900D96B5E /* iTrek_0 */; };
+		96902BB40EBC963A001AA3AD /* ai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BA90EBC963A001AA3AD /* ai.cpp */; };
+		96902BB50EBC963A001AA3AD /* battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAA0EBC963A001AA3AD /* battle.cpp */; };
+		96902BB60EBC963A001AA3AD /* events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAB0EBC963A001AA3AD /* events.cpp */; };
+		96902BB70EBC963A001AA3AD /* finish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAC0EBC963A001AA3AD /* finish.cpp */; };
+		96902BB80EBC963A001AA3AD /* moving.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAD0EBC963A001AA3AD /* moving.cpp */; };
+		96902BB90EBC963A001AA3AD /* osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAE0EBC963A001AA3AD /* osx.cpp */; };
+		96902BBA0EBC963A001AA3AD /* planets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BAF0EBC963A001AA3AD /* planets.cpp */; };
+		96902BBB0EBC963A001AA3AD /* reports.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB00EBC963A001AA3AD /* reports.cpp */; };
+		96902BBC0EBC963A001AA3AD /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB10EBC963A001AA3AD /* setup.cpp */; };
+		96902BBD0EBC963A001AA3AD /* sst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96902BB20EBC963A001AA3AD /* sst.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = /usr/share/man/man1/;
+			buildActionMask = 12;
+			dstPath = /Users/aichao/Home/Games/sst/iTrek/build/Release;
 			dstSubfolderSpec = 0;
 			files = (
-				8DD76F6A0486A84900D96B5E /* iTrek_0.1 in CopyFiles */,
+				960AD4A31B2E067A0046C899 /* iTrek_0 in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8DD76F6C0486A84900D96B5E /* iTrek_0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = iTrek_0; sourceTree = BUILT_PRODUCTS_DIR; };
-		96902BA90EBC963A001AA3AD /* ai.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ai.c; sourceTree = "<group>"; };
-		96902BAA0EBC963A001AA3AD /* battle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = battle.c; sourceTree = "<group>"; };
-		96902BAB0EBC963A001AA3AD /* events.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = events.c; sourceTree = "<group>"; };
-		96902BAC0EBC963A001AA3AD /* finish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = finish.c; sourceTree = "<group>"; };
-		96902BAD0EBC963A001AA3AD /* moving.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = moving.c; sourceTree = "<group>"; };
-		96902BAE0EBC963A001AA3AD /* osx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = osx.c; sourceTree = "<group>"; };
-		96902BAF0EBC963A001AA3AD /* planets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planets.c; sourceTree = "<group>"; };
-		96902BB00EBC963A001AA3AD /* reports.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reports.c; sourceTree = "<group>"; };
-		96902BB10EBC963A001AA3AD /* setup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setup.c; sourceTree = "<group>"; };
-		96902BB20EBC963A001AA3AD /* sst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sst.c; sourceTree = "<group>"; };
+		96902BA90EBC963A001AA3AD /* ai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ai.cpp; sourceTree = "<group>"; };
+		96902BAA0EBC963A001AA3AD /* battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = battle.cpp; sourceTree = "<group>"; };
+		96902BAB0EBC963A001AA3AD /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = events.cpp; sourceTree = "<group>"; };
+		96902BAC0EBC963A001AA3AD /* finish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = finish.cpp; sourceTree = "<group>"; };
+		96902BAD0EBC963A001AA3AD /* moving.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moving.cpp; sourceTree = "<group>"; };
+		96902BAE0EBC963A001AA3AD /* osx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = osx.cpp; sourceTree = "<group>"; };
+		96902BAF0EBC963A001AA3AD /* planets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = planets.cpp; sourceTree = "<group>"; };
+		96902BB00EBC963A001AA3AD /* reports.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reports.cpp; sourceTree = "<group>"; };
+		96902BB10EBC963A001AA3AD /* setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup.cpp; sourceTree = "<group>"; };
+		96902BB20EBC963A001AA3AD /* sst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sst.cpp; sourceTree = "<group>"; };
 		96902BB30EBC963A001AA3AD /* sst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst.h; sourceTree = "<group>"; };
 		96A5331210E1627300577602 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
-		C6859E8B029090EE04C91782 /* iTrek_0.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = iTrek_0.1; sourceTree = "<group>"; };
+		96EEFB661B349C330051781B /* osx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = osx.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,17 +74,18 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				96902BA90EBC963A001AA3AD /* ai.c */,
-				96902BAA0EBC963A001AA3AD /* battle.c */,
-				96902BAB0EBC963A001AA3AD /* events.c */,
-				96902BAC0EBC963A001AA3AD /* finish.c */,
-				96902BAD0EBC963A001AA3AD /* moving.c */,
-				96902BAE0EBC963A001AA3AD /* osx.c */,
-				96902BAF0EBC963A001AA3AD /* planets.c */,
-				96902BB00EBC963A001AA3AD /* reports.c */,
-				96902BB10EBC963A001AA3AD /* setup.c */,
-				96902BB20EBC963A001AA3AD /* sst.c */,
+				96902BA90EBC963A001AA3AD /* ai.cpp */,
+				96902BAA0EBC963A001AA3AD /* battle.cpp */,
+				96902BAB0EBC963A001AA3AD /* events.cpp */,
+				96902BAC0EBC963A001AA3AD /* finish.cpp */,
+				96902BAD0EBC963A001AA3AD /* moving.cpp */,
+				96902BAE0EBC963A001AA3AD /* osx.cpp */,
+				96902BAF0EBC963A001AA3AD /* planets.cpp */,
+				96902BB00EBC963A001AA3AD /* reports.cpp */,
+				96902BB10EBC963A001AA3AD /* setup.cpp */,
+				96902BB20EBC963A001AA3AD /* sst.cpp */,
 				96902BB30EBC963A001AA3AD /* sst.h */,
+				96EEFB661B349C330051781B /* osx.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -100,7 +101,6 @@
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				C6859E8B029090EE04C91782 /* iTrek_0.1 */,
 				96A5331210E1627300577602 /* Todo */,
 			);
 			name = Documentation;
@@ -134,7 +134,11 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "iTrek_0" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* iTrek_0 */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,16 +153,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96902BB40EBC963A001AA3AD /* ai.c in Sources */,
-				96902BB50EBC963A001AA3AD /* battle.c in Sources */,
-				96902BB60EBC963A001AA3AD /* events.c in Sources */,
-				96902BB70EBC963A001AA3AD /* finish.c in Sources */,
-				96902BB80EBC963A001AA3AD /* moving.c in Sources */,
-				96902BB90EBC963A001AA3AD /* osx.c in Sources */,
-				96902BBA0EBC963A001AA3AD /* planets.c in Sources */,
-				96902BBB0EBC963A001AA3AD /* reports.c in Sources */,
-				96902BBC0EBC963A001AA3AD /* setup.c in Sources */,
-				96902BBD0EBC963A001AA3AD /* sst.c in Sources */,
+				96902BB40EBC963A001AA3AD /* ai.cpp in Sources */,
+				96902BB50EBC963A001AA3AD /* battle.cpp in Sources */,
+				96902BB60EBC963A001AA3AD /* events.cpp in Sources */,
+				96902BB70EBC963A001AA3AD /* finish.cpp in Sources */,
+				96902BB80EBC963A001AA3AD /* moving.cpp in Sources */,
+				96902BB90EBC963A001AA3AD /* osx.cpp in Sources */,
+				96902BBA0EBC963A001AA3AD /* planets.cpp in Sources */,
+				96902BBB0EBC963A001AA3AD /* reports.cpp in Sources */,
+				96902BBC0EBC963A001AA3AD /* setup.cpp in Sources */,
+				96902BBD0EBC963A001AA3AD /* sst.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +173,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -180,6 +187,7 @@
 				);
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = iTrek_0;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -187,17 +195,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = iTrek_0;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -205,20 +219,23 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		1DEB923708733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

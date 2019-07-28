@@ -1,6 +1,6 @@
 /*
  *  command_input_utilities.cpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/22/11.
  *  Copyright 2011 Alan Chao. All rights reserved.
@@ -24,4 +24,12 @@ bool is_number(std::string const& in) {
   return boost::algorithm::all(in, boost::algorithm::is_digit() || boost::algorithm::is_any_of(".-+"));
 }
 
+bool is_integer(std::string const& in) {
+  return boost::algorithm::all(in, boost::algorithm::is_digit() || boost::algorithm::is_any_of("-+"));
+}
+
+bool is_unsigned(std::string const& in) {
+  return boost::algorithm::all(in, boost::algorithm::is_digit());
+}
+  
 } // end namespace iTrek

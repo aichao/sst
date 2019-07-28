@@ -1,12 +1,53 @@
+2015-06-18:
+
+1) Need first to convert project to C++11
+-> Done.
+2) For multi-token commands, we should check the game state before handling
+additional tokens. This is for the commands:
+- move
+- warp
+- impulse
+- shields
+- phasers (consult TestCommandState/phasers_command.cpp for details)
+- photons
+- rest
+- probe
+The checking of game state in the original code is marked by GS_CHECK
+
+3) All output to screen should be replaced by a display event, this includes:
+- replace all calls to printf, sprintf, and putchar with ostringstream that can
+  then be used in a call to proutn
+-> Done.
+- reimplementing proutn to create a display event
+
+4) Replace scan() with parse() as directed by comments. Modify chew and chew2
+accordingly.
+
+5) All additional inputs other than commands using scan() should be disabled, 
+these include:
+- use of getch() in pause()
+- use of fgets() in helpme() and plaque()
+- use of ja() apart from command parsing in events(), scom(), finish(), beam(),
+shuttle(), usecrystal(), deathray(), and main()
+- use of scan() in dstrct(), eta(), thaw(), choose(). Here, dstrct() and eta()
+should be incorporated in the command state for destruct and computer; thaw() 
+and choose() are outside of the command loop.
+
 Global data structures for Build 001:
 
 Current global variables
-1) d.galaxy: 2-d array of 3-digit (4 if supernova) number quantifying number of enemies, starbases, and stars in each quadrant
-2) d.newstuf: 2-d array of 2-digit number quantifying number of romulans and planets in each quadrant
-3) kx: x-coordinate sector locations of enemies in a quadrant (set when entering a quadrant)
-4) ky: y-coordinate sector locations of enemies in a quadrant (set when entering a quadrant)
-5) quad: 2-d array of characters specifying content of quadrant at each sector location. This is displayed in SRSCAN
-6) starch: 2-d array of 3-digit (4 if supernova) number quantifying number of enemies, starbases, and stars in each quadrant. This is displayed in LRSCAN
+1) d.galaxy: 2-d array of 3-digit (4 if supernova) number quantifying number of 
+enemies, starbases, and stars in each quadrant
+2) d.newstuf: 2-d array of 2-digit number quantifying number of romulans and 
+planets in each quadrant
+3) kx: x-coordinate sector locations of enemies in a quadrant (set when entering 
+a quadrant)
+4) ky: y-coordinate sector locations of enemies in a quadrant (set when entering 
+a quadrant)
+5) quad: 2-d array of characters specifying content of quadrant at each sector 
+location. This is displayed in SRSCAN
+6) starch: 2-d array of 3-digit (4 if supernova) number quantifying number of 
+enemies, starbases, and stars in each quadrant. This is displayed in LRSCAN
 
 Screen layout for Build 002:
 
@@ -56,36 +97,46 @@ Scrolling text window
 
 Notes:
 
-1) We should use boost/spirit as a parser for commands. See the VRML parser for an example.
-2) One interesting aspect of game would be to have a tech tree for the enemy. At the beginning, we
-would have tech superiority with faster ships, better shields/weapons, etc. while the enemy will 
-have numbers but as time goes on the enemy will catch on IF they are able to attain certain materials
-which comes from discovering and controlling certain planets. A goal would then to be able to 
-control these planets (ally with them) or to destroy these assets after they have been taken over by 
-the enemy. Otherwise, the enemy will grow in strength and eventually be overwhelming. Difficulty can be 
-set in terms of the starting position of the enemy in this tech tree. We can also have a tech tree in 
-terms of enhancing our weapons, shields, etc. All of these technologies, however, will have a limit. 
-As the game progresses, it will be harder and harder to win since the enemy will have the same 
-technology and there will be more of them.
-3) Another interesting aspect of game will be to have intel involved in finding tech advances for 
-ourselves and the enemy. Intel can also be involved in finding key enemy commanders (by their warp trail
-signatures) with the intent that killing these key personnel can reduce enemy moral (halt tech advances,
-lower their numbers) and aid in winning the game sooner. Intel can also be involved in intercepting convoys 
-with key materials to slow their tech advance and to enhance our capabilities. Intel can specify missions
-such as rendevous with certain ships to protect a convoy or to attack an enemy battle group.
-4) Another interesting aspect of game is to win over neutral alien civilizations. This will result in more 
-and better (more accurate intel) and cheaper material costs in trades. The opposite will result in aliens
-working with the enemy to defeat us. This would occur, for example, if we attack the aliens to get materials.
-A neutral alien civilization when visited by us can either side with us or remain neutral. If they remain 
-neutral, they can still trade with us or refuse to do so to remain neutral. If they side with us, then they 
-could be attacked by the enemy so we may have to protect them. If they are attacked, they could be conquered. 
-If they remain neutral, then the enemy will not attack them (i.e., we could expect that they can take care of 
-themselves if attacked). A neutral alien will not side with the enemy unless we choose to attack them for their 
-goods. Finally an alien civilization can initially contact us for protection from the enemy and will then 
-choose to side with us. A difference is that we can never conquer an aien civilization (don't have the 
-occupation forces) while the enemy does (can force the alien to side with them). Therefore, we must convince
-an alien to side with us by protecting or liberating them from the enemy; otherwise they remain neutral or
-worse will be forever against us if we attack them.
+1) We should use boost/spirit as a parser for commands. See the VRML parser for 
+an example.
+2) One interesting aspect of game would be to have a tech tree for the enemy. At 
+the beginning, we would have tech superiority with faster ships, better 
+shields/weapons, etc. while the enemy will have numbers but as time goes on the 
+enemy will catch on IF they are able to attain certain materials which comes 
+from discovering and controlling certain planets. A goal would then to be able 
+to control these planets (ally with them) or to destroy these assets after they 
+have been taken over by the enemy. Otherwise, the enemy will grow in strength 
+and eventually be overwhelming. Difficulty can be set in terms of the starting 
+position of the enemy in this tech tree. We can also have a tech tree in terms 
+of enhancing our weapons, shields, etc. All of these technologies, however, will 
+have a limit. As the game progresses, it will be harder and harder to win since 
+the enemy will have the same technology and there will be more of them.
+3) Another interesting aspect of game will be to have intel involved in finding 
+tech advances for ourselves and the enemy. Intel can also be involved in finding 
+key enemy commanders (by their warp trail signatures) with the intent that 
+killing these key personnel can reduce enemy moral (halt tech advances, lower 
+their numbers) and aid in winning the game sooner. Intel can also be involved in 
+intercepting convoys with key materials to slow their tech advance and to 
+enhance our capabilities. Intel can specify missions such as rendevous with 
+certain ships to protect a convoy or to attack an enemy battle group.
+4) Another interesting aspect of game is to win over neutral alien 
+civilizations. This will result in more and better (more accurate intel) and 
+cheaper material costs in trades. The opposite will result in aliens working 
+with the enemy to defeat us. This would occur, for example, if we attack the 
+aliens to get materials. A neutral alien civilization when visited by us can 
+either side with us or remain neutral. If they remain neutral, they can still 
+trade with us or refuse to do so to remain neutral. If they side with us, then 
+they could be attacked by the enemy so we may have to protect them. If they are 
+attacked, they could be conquered. If they remain neutral, then the enemy will 
+not attack them (i.e., we could expect that they can take care of themselves if 
+attacked). A neutral alien will not side with the enemy unless we choose to 
+attack them for their goods. Finally an alien civilization can initially contact 
+us for protection from the enemy and will then choose to side with us. A 
+difference is that we can never conquer an aien civilization (don't have the 
+occupation forces) while the enemy does (can force the alien to side with them). 
+Therefore, we must convince an alien to side with us by protecting or liberating 
+them from the enemy; otherwise they remain neutral or worse will be forever 
+against us if we attack them.
 
                                                            Conquered by enemy -> Side with enemy
                                                                     ^                  |
@@ -98,82 +149,109 @@ Remain Neutral <- Visited by us -------------------------------------
         v
 Attacked by us -> Side with enemy forever
 
-5) A really cool thing to have is a simple grammar for communications with a set of known keywords. Then
-communications will wnable parsing of inputs with respect to this grammar. The default response would be
-something like "I don't understand what you are saying" with different resulting contexts based on whether
-the communication is with respect to an ally, neutral, or enemy party. A very cool extension to this is 
-to employ voice recognition so that one does not need to type. Here voice synthesis will also be used to 
-generate the responses. This can also be extended to other commands such as Analysis, Damage control, Trade 
-and Material acquisition, Shield control, tactical alerts, long range Navigation (set course and Warp).
-Basically, everything except tactical navigation and weapons control.
-6) The actions of the game occur at discrete times. The interval between these discrete times is called the
-decision time. The decision time can be set so that the actions of the game appears to be in real-time.
-7) Every system on the ship requires energy, which is the key commodity in the game. Normally, the warp
-engines (core) of the ship provides more than enough energy for the ship per decision time. When damaged, 
-however, the warp core may only produce a fraction of the energy necessary to run all systems. In this case, 
-some systems may no longer function. The order of systems in terms of their energy requirements from highest 
-to lowest are:
+5) A really cool thing to have is a simple grammar for communications with a set 
+of known keywords. Then communications will wnable parsing of inputs with 
+respect to this grammar. The default response would be something like "I don't 
+understand what you are saying" with different resulting contexts based on 
+whether the communication is with respect to an ally, neutral, or enemy party. 
+A very cool extension to this is to employ voice recognition so that one does 
+not need to type. Here voice synthesis will also be used to generate the 
+responses. This can also be extended to other commands such as Analysis, Damage 
+control, Trade and Material acquisition, Shield control, tactical alerts, long 
+range Navigation (set course and Warp). Basically, everything except tactical 
+navigation and weapons control.
+6) The actions of the game occur at discrete times. The interval between these 
+discrete times is called the decision time. The decision time can be set so that 
+the actions of the game appears to be in real-time.
+7) Every system on the ship requires energy, which is the key commodity in the 
+game. Normally, the warp engines (core) of the ship provides more than enough 
+energy for the ship per decision time. When damaged, however, the warp core may 
+only produce a fraction of the energy necessary to run all systems. In this 
+case, some systems may no longer function. The order of systems in terms of 
+their energy requirements from highest to lowest are:
 i) Warp drive
 ii) Phaser weapons
 iii) Shield regeneration
 iv) Impulse engines
-v) All other systems except life support (i.e., computers/materials generation/sensors/communication/transporter), 
+v) All other systems except life support (i.e., computers/materials 
+generation/sensors/communication/transporter),
 vi) and finally Life Support.
-Therefore, if the warp engines or core is damaged, the first system to fail is the ability to go to warp, which 
-requires the most energy. More damage will result in more systems failing in that order. There are cases where one
-can divert energy from certain systems to certain systems, but this is somewhat limited in a tactical situation since 
-most of the "unnecessary" systems do not require enough energy as compared to the warp drive, weapons, or shields.
-One scenario is when minor damage to one or more warp nacelles result in limited warp capability (i.e., warp factor
-limit), but that energy from phasers and/or shields can be diverted to achieve a higher warp speed. On the other hand, 
-life support is the last system to fail. Basically, the life support system will remain functional unless the warp 
-engines are totally shutdown and the ship drifts in space for a prolong period. Damage to the warp engines can be due 
-to damage to the warp nacelles. This usually result in overloading of the dilithium crystal circuits, which can be 
-replaced if one has extra dilithium crystal stored. This kind of damage can also be the result of damage sustained on 
-the engineering section itself (i.e., the warp engine/core itself). The latter can also result in a core breach, which 
-leads to a catastrophic failure and explosion. Core breach cannot occur from nacelle damage.
+Therefore, if the warp engines or core is damaged, the first system to fail is 
+the ability to go to warp, which requires the most energy. More damage will 
+result in more systems failing in that order. There are cases where one can 
+divert energy from certain systems to certain systems, but this is somewhat 
+limited in a tactical situation since most of the "unnecessary" systems do not 
+require enough energy as compared to the warp drive, weapons, or shields. One 
+scenario is when minor damage to one or more warp nacelles result in limited 
+warp capability (i.e., warp factor limit), but that energy from phasers and/or 
+shields can be diverted to achieve a higher warp speed. On the other hand, life 
+support is the last system to fail. Basically, the life support system will 
+remain functional unless the warp engines are totally shutdown and the ship 
+drifts in space for a prolong period. Damage to the warp engines can be due to 
+damage to the warp nacelles. This usually result in overloading of the dilithium 
+crystal circuits, which can be replaced if one has extra dilithium crystal 
+stored. This kind of damage can also be the result of damage sustained on the 
+engineering section itself (i.e., the warp engine/core itself). The latter can 
+also result in a core breach, which leads to a catastrophic failure and 
+explosion. Core breach cannot occur from nacelle damage.
 
 Sensors:
-Sensors are automatic in that relevant objects detected by the sensors are reported (but not necessarily analyzed 
-until commanded to do so). There are two types of sensors:
-1) Short range sensors: this is the tactical sensors and all detected objects are reported on the screen. The
-magnification (i.e., range displayed on the screen) depends on what is detected and automatically set so that 
-the most relevant objects are on the screen. Relevance is in the order of other ships (either ally, neutral,
-or enemy), warp trails, starbases, planets, then star systems. If enemy or neutral crafts are within weapons 
-range, tactical alert is yellow or red, then the tactical screen will encompass those objects. Tactical display 
-can be obstructed by planetary objects (i.e., when in orbit of such an object) or by damage to the sensor
-(sector by sector). The Enterprise or its formation is always aligned front-up in the tactical display. It may 
-not be centered on the display, but off-centered depending on the positioning of the relevant objects detected.
-That is, the center of the tactical display is the centroid of the cluster of relevant objects plus the Enterprise
-with some buffer at the edges.
-2) Long range sensors: this is not really a sensor but an amalgation of sensor information/analysis, communicated 
-intelligence, and database information overlaid on the star chart. The difference between the information in the 
-long range sensors and the star chartitself is that the information in the long range sensors changes over time
-as more information is collected and old information fades in relevance. The use case for long range sensors is 
-that all sensor data, communications are collected and persisted in the database along the path of the Enterprise. 
-One can then review this data (at a later time) in the long range sensor screen and perform analysis on them for
-strategic planning (i.e., where to get materials, where the enemy may be, what they may be up to, etc.). 
+Sensors are automatic in that relevant objects detected by the sensors are 
+reported (but not necessarily analyzed until commanded to do so). There are two 
+types of sensors:
+1) Short range sensors: this is the tactical sensors and all detected objects 
+are reported on the screen. The magnification (i.e., range displayed on the 
+screen) depends on what is detected and automatically set so that the most 
+relevant objects are on the screen. Relevance is in the order of other ships 
+(either ally, neutral, or enemy), warp trails, starbases, planets, then star 
+systems. If enemy or neutral crafts are within weapons range, tactical alert is 
+yellow or red, then the tactical screen will encompass those objects. Tactical 
+display can be obstructed by planetary objects (i.e., when in orbit of such an 
+object) or by damage to the sensor (sector by sector). The Enterprise or its 
+formation is always aligned front-up in the tactical display. It may not be 
+centered on the display, but off-centered depending on the positioning of the 
+relevant objects detected. That is, the center of the tactical display is the 
+centroid of the cluster of relevant objects plus the Enterprise with some buffer 
+at the edges.
+2) Long range sensors: this is not really a sensor but an amalgation of sensor 
+information/analysis, communicated intelligence, and database information 
+overlaid on the star chart. The difference between the information in the long 
+range sensors and the star chartitself is that the information in the long range 
+sensors changes over time as more information is collected and old information 
+fades in relevance. The use case for long range sensors is that all sensor data, 
+communications are collected and persisted in the database along the path of the 
+Enterprise. One can then review this data (at a later time) in the long range 
+sensor screen and perform analysis on them for strategic planning (i.e., where 
+to get materials, where the enemy may be, what they may be up to, etc.).
 
 Tactical Alerts:
-Tactical alerts are important mechanism to convey a tactical situation. There are three levels of alert:
-1) Green: normal status. Shields and weapons are not manned. Shields and weapons can only be used in the decision 
-cycle after the next cycle. This exposes the Enterprise to one round of surprise attack. Shields are down. Phasers
-are not charged (takes more time to charge than to bring shields up). Torpedoes are not loaded (takes more time to 
-load than phasers to charge).
-2) Yellow: stand-by status. Shields and weapons are manned can be used within next decision cycle. Shields are down.
-Torpedoes are loaded. Phasers may or may not be charged. It does take the time too load torpedoes to go from Green to
-Yellow alert. Yellow alert is meant to put the ship on alert without alerting the enemy. When Yellow alert is 
-automatically set by the sensors, Phasers are not charged. One may choose to charge Phasers so that they can be fired
-in the next decision cycle but this will alert the enemy of your intentions to attack.
-3) Red: combat status. Shields and weapons are manned and ready. Shields are up, phasers are charged, torpedoes are 
-loaded. It takes one more decision cycle to go from Yellow to Red alert.
-Tactical alerts are automatically set based on sensor detections:
+Tactical alerts are important mechanism to convey a tactical situation. There 
+are three levels of alert:
+1) Green: normal status. Shields and weapons are not manned. Shields and weapons 
+can only be used in the decision cycle after the next cycle. This exposes the 
+Enterprise to one round of surprise attack. Shields are down. Phasers are not 
+charged (takes more time to charge than to bring shields up). Torpedoes are not 
+loaded (takes more time toload than phasers to charge).
+2) Yellow: stand-by status. Shields and weapons are manned can be used within 
+next decision cycle. Shields are down. Torpedoes are loaded. Phasers may or may 
+not be charged. It does take the time too load torpedoes to go from Green to 
+Yellow alert. Yellow alert is meant to put the ship on alert without alerting 
+the enemy. When Yellow alert is automatically set by the sensors, Phasers are
+not charged. One may choose to charge Phasers so that they can be fired in the 
+next decision cycle but this will alert the enemy of your intentions to attack.
+3) Red: combat status. Shields and weapons are manned and ready. Shields are up, 
+phasers are charged, torpedoes are loaded. It takes one more decision cycle to 
+go from Yellow to Red alert. Tactical alerts are automatically set based on 
+sensor detections:
 1) Green: default when there are no ships in tactical sensor range.
-2) Yellow: when neutral or enemy ships are detected (and identified) in tactical sensor range. For enemy ships, Yellow
-alert is declared if shields and weapons of detected ships are not detected to be up and charged.
-3) Red: when neutral or enemy ships are detected with shields up or weapons charged.
-One can also manually set the tactical alert status. This is especially useful when going from Yellow (or Green) to Red 
-when you expect a surprise attack. One should not always put the ship on Yellow (or Red) alert as this reduces combat 
-efficiency dramatically.
+2) Yellow: when neutral or enemy ships are detected (and identified) in tactical 
+sensor range. For enemy ships, Yellow alert is declared if shields and weapons 
+of detected ships are not detected to be up and charged.
+3) Red: when neutral or enemy ships are detected with shields up or weapons 
+charged. One can also manually set the tactical alert status. This is especially 
+useful when going from Yellow (or Green) to Red when you expect a surprise 
+attack. One should not always put the ship on Yellow (or Red) alert as this 
+reduces combat efficiency dramatically.
 
 Navigation:
 1) Warp drive: exponential factor (base10) on speed of light.
@@ -188,46 +266,93 @@ Navigation:
       - Star system/planet (fixed location)
       - Ships (intercept)
       - Warp trail (trajectory)
-    - Selectable from tactical sensor but not precise. Will only shift trajectory.
+    - Selectable from tactical sensor but not precise. Will only shift 
+      trajectory.
     - Select warp speed and then engage.
 2) Impulse engine: sublight
   - High manuerverability
     - Can change speed manually (touch swipe up/down)
     - Turning rate limited proportionally to speed
-    - Can execute evasive manuever to dodge torpedoes/ramming ships (touch swipe left/right)
-  - Manual navigation by choosing desired location on tactical display (not object)
+    - Can execute evasive manuever to dodge torpedoes/ramming ships (touch swipe 
+      left/right)
+  - Manual navigation by choosing desired location on tactical display (not 
+    object)
   - Automatic navigation by choosing object on tactical display
-    - Star/planet/starbase (fixed location) automatic path planning to orbit/dock
+    - Star/planet/starbase (fixed location) automatic path planning to 
+      orbit/dock
     - Enemy ship to ram (otherwise target with weapon)
     - Friendly/neutral ship to dock (only condition green, no enemy around)
 Weapons:
 
 Shields:
-Shields protect the ship from phaser and torpedoes. Shields are able to absorb damage in terms of energy units and
-regenerates at a given rate in decision time up to a maximum level. Regeneration occurs unless the shields are damaged
-or the warp engines themselves are damaged to the point where the energy level of the ship falls below the level 
-necessary for shield regeneration. Shields can make the ship invulnerable to attack from an enemy if the enemy's 
-weapons does no more damage than the shield regeneration rate per decision cycle. The shielding for the ship is 
-divided into four sectors (i.e., front, left, right, and rear) plus separate shielding for the warp core 
-(i.e., engineering). The four sectors correspond to various key systems in the ship:
-1) Front: bridge (i.e., communications, navigation), forward phasers, forward torpedoes, forward tactical 
-sensors, forward shield control
-2) Left Side: left side phasers, left side tactical sensors, left warp nacelle, left side shield control
-3) Right Side: right side phasers, right side tactical sensors, right warp nacelle, right side shield control
-4) Rear: impulse engine, rear phasers, rear torpedoes, rear tactical sensors, shuttle bay, rear shield control
-Depleting the shield to zero (or negative) exposes these systems to damage on the same hit or the next hit. In 
-particular, when the shielding is depleted to zero or below, there is high probability that the underlying shield 
-regeneration system is damaged on that hit, resulting in shield damage in that sector. At the same time, other systems 
-in that sector can also be damaged, but at lower probability. Subsequent hits in that sector, however, will result in 
-damage to those systems with high probability. In addition, hull damage in these sectors can occur along with loss of 
-life. Furthermore, breaching of the shielding in any sector exposes the core shielding to attack. The core correspond 
-to the engineering section with key systems: warp core, material generation, backup navigation, backup communications, 
-transporter, and computers/long range sensors/star chart. Damage to the warp core will shut down the warp engine (and 
-therefore overall ship energy regeneration) and can cause a catastrophic explosion (i.e., core breach). The regeneration 
-of shields for a sector can be increased multi-folds by transfering shield regeneration capability from other sectors 
-(not damaged). This leaves those other sectors with no shield regeneration capability. This is advantageous if the enemy 
-is only on one side and/or multiple allied ships are in formation so that their shields overlap one another.
+Shields protect the ship from phaser and torpedoes. Shields are able to absorb 
+damage in terms of energy units and regenerates at a given rate in decision time 
+up to a maximum level. Regeneration occurs unless the shields are damaged or the 
+warp engines themselves are damaged to the point where the energy level of the 
+ship falls below the level necessary for shield regeneration. Shields can make 
+the ship invulnerable to attack from an enemy if the enemy's weapons does no 
+more damage than the shield regeneration rate per decision cycle. The shielding 
+for the ship is divided into four sectors (i.e., front, left, right, and rear) 
+plus separate shielding for the warp core (i.e., engineering). The four sectors 
+correspond to various key systems in the ship:
+1) Front: bridge (i.e., communications, navigation), forward phasers, forward 
+torpedoes, forward tactical sensors, forward shield control
+2) Left Side: left side phasers, left side tactical sensors, left warp nacelle, 
+left side shield control
+3) Right Side: right side phasers, right side tactical sensors, right warp 
+nacelle, right side shield control
+4) Rear: impulse engine, rear phasers, rear torpedoes, rear tactical sensors, 
+shuttle bay, rear shield control
+Depleting the shield to zero (or negative) exposes these systems to damage on 
+the same hit or the next hit. In particular, when the shielding is depleted to 
+zero or below, there is high probability that the underlying shield regeneration 
+system is damaged on that hit, resulting in shield damage in that sector. At the 
+same time, other systemsin that sector can also be damaged, but at lower 
+probability. Subsequent hits in that sector, however, will result in damage to 
+those systems with high probability. In addition, hull damage in these sectors 
+can occur along with loss of life. Furthermore, breaching of the shielding in 
+any sector exposes the core shielding to attack. The core correspond to the 
+engineering section with key systems: warp core, material generation, backup 
+navigation, backup communications, transporter, and computers/long range 
+sensors/star chart. Damage to the warp core will shut down the warp engine (and
+therefore overall ship energy regeneration) and can cause a catastrophic 
+explosion (i.e., core breach). The regeneration of shields for a sector can be 
+increased multi-folds by transfering shield regeneration capability from other 
+sectors (not damaged). This leaves those other sectors with no shield 
+regeneration capability. This is advantageous if the enemy is only on one side 
+and/or multiple allied ships are in formation so that their shields overlap one 
+another.
 
 Computer/database:
 Materials/trade/transport/shuttle/mine/damages/repair:
 Communications/probe/intelligence:
+
+Probes:
+Currently, probes are used to find enemes. However, this assumes a static game
+state where enemies are stationary. Instead, probes should sense planets and
+events. Sensing of planets include sensing of resources in those planets including
+civilizations and their technology level. Civilizations with low technology level
+may be easier to conquer by the enemy and easier to trade with. On the other hand,
+civilizations with higher technology levels may not want to take sides (i.e.,
+offer to trade) or can be outright hostile.Sensing of events include detecting
+enemy locations and communications. These include, for example, distress calls
+from attacked ships or civilizations or enemy communications on their convoy
+locations. Probes travel faster than the ship (i.e., sustained warp 9) but have
+limited life. They themselves are hard to detect and will self-destruct at the
+end of their range to avoid detection. There is a cost in building and sending
+a probe in terms of resources.
+
+Storyline:
+- An interesting storyline would be to go back in time to change events in order 
+to win the game. Going back in time will require a special resource or 
+technology and will incur risk (not surviving the travel; not able to come 
+back). Consider the fact that winning the game would require defeating the 
+klingons but that at a certain point this becomes impossible as the klingons 
+gain more and more ground. Then the only way to win the game is to go back to a 
+certain point in time to stop the klingon empire from ever becoming a conquering 
+force. The discovery of such a possible path can be a part of the storyline 
+where artifacts are discovered as to the origins of the klingon empire so as to 
+identify the precise point in time at which this can be prevented. Then this 
+opens up to another possible path to win the game. Other such time travel paths
+are also possible for minor quests.
+

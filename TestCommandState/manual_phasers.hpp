@@ -1,35 +1,31 @@
 /*
  *  manual_phasers.hpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/22/11.
  *  Copyright 2011 Alan I Chao. All rights reserved.
  *
  */
 
-#ifndef MANUAL_PHASERS_HPP
-#define MANUAL_PHASERS_HPP
+#ifndef iTrek_manual_phasers_hpp
+#define iTrek_manual_phasers_hpp
 
-#include "CommandState.hpp"
+#include "command_state.hpp"
 
 namespace iTrek { 
-namespace CommandInputState {   
-    
+namespace command_input_state {   
+
 /** 
  */
-class manual_phasers : public CommandState {
+class manual_phasers : public command_state {
  public:
-    
-  /** Interface to execute the state action. State specific processing
-   *  is implemented in the derived class. This method is responsible 
-   *  for transitioning the state after executing the state action. 
-   *  While executing the state action, this method may also post 
-   *  events to the EventQueue.
+  /** This method .... 
+   *  This method always return handled_but_incomplete.
    */
-  virtual void executeAction(CommandInputHandler * handler);
+  virtual boost::logic::tribool handle(command_input_handler* handler) const;
 };
-    
-} // end namesoace CommandInputState
-} // end namesoace iTrek
+
+} // end namespace command_input_state
+} // end namespace iTrek
 
 #endif

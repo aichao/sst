@@ -1,39 +1,127 @@
+2015-06-16: remaining commands to implement:
+
+1) STATUS
+2) LRSCAN
+3) CHART
+4) DAMAGES
+5) REPORT
+6) COMPUTER
+7) DOCK
+8) CALL
+9) ABANDON
+10) DESTRUCT
+11) SENSORS
+12) ORBIT
+13) TRANSPORT
+14) SHUTTLE
+15) MINE
+16) CRYSTALS
+17) PLANETS
+18) DEATHRAY
+19) EMEXIT
+
+For the probe command:
+i) if just probe, prompt # probe(s) left.\nAre you sure you want to fire a probe?
+ii) if answer yes, prompt Arm NOVAMAX warhead?
+iii) if answer yes, add "armed" to command
+iv) if answer yes or no, prompt manual or automatic-
+v) if answer is not yes or no for (i) and (ii), then command error
+vi) if probe + armed, then add armed to command (i.e., armed is optional), then 
+prompt manual or automatic-
+Therefore:
+- probe_command should peek at next token:
+  - if it is empty, transition to probe_query state and return false
+  - if it is "armed" (exact match), add to command and transition to move_mode
+  - if it is not empty and not "armed" (else), transition to move_mode
+  - return handled_but_incomplete
+- probe_query should get next token:
+  - if it matches "yes", clear queue, transition to probe_armed, and return 
+    false
+  - if it matches "no", transition to ignore command and return 
+    handled_but_incomplete
+  - if it does not match either "yes" or "no" (else), transition to command 
+    error and return handled_but_incomplete
+- probe_armed should get next token:
+  - if it matches "yes", add "armed" to command, clear queue, transition to 
+    move_mode, and return handled_but_incomplete
+  - if it matches "no", clear queue, transition to move_mode and return
+    handled_but_incomplete
+  - if it does not match either "yes" or "no" (else), transition to command 
+    error and return handled_but_incomplete
+    
+Game State Visitor:
+
+Two options for use:
+i) special command state that calls the visitor. The visitor then transitions 
+   the state and returns handled_but_incomplete.
+ii) the command state calls the visitor, but the visitor does not transition 
+    the state. Instead, it returns a status depending on the game state that
+    is checked that is then interpreted by the command state caller to 
+    transition the state.
+The advantage of the first is encapsulation. The command state does not need 
+to know anything about the game state to interpret what is returned by the 
+visitor. However, the visitor then needs to also be a friend of the 
+command_input_handler in order to transition the state.
+
 CommandState
 
-CommandState uses the State pattern to represent the interaction states during command input
-in the super star trek game. The objective is to separate command input from command execution. 
-The interaction during command input can be expressed as a sequence of states in a state machine
-where for each state the InputCommandHandler is prompting the user to input the portion of the 
-command corresponding to that state. The individual state is responsible for interpreting the 
-input and transitioning to the next state in the sequence. The command data is maintained by the 
-InputCommandHandler; each state contributes to this data when interpreting the input data. The 
-state objects need not maintain its own data, and therefore can be Singletons. The purpose of the
-state machine is not to represent a parser, but rather to handle the interaction with the user 
-during command input. Because parsing with respect to a grammar is not the objective, the Interpreter 
-pattern is not used. The state machine can be implemented using boost state chart, but we think that
-may be overkill in this case.
+CommandState uses the State pattern to represent the interaction states during 
+command input in the super star trek game. The objective is to separate command 
+input from command execution. The interaction during command input can be 
+expressed as a sequence of states in a state machine where for each state the 
+InputCommandHandler is prompting the user to input the portion of the command 
+corresponding to that state. The individual state is responsible for 
+interpreting the input and transitioning to the next state in the sequence. The 
+command data is maintained by the InputCommandHandler; each state contributes to 
+this data when interpreting the input data. The state objects need not maintain 
+its own data, and therefore can be Singletons. The purpose of the state machine 
+is not to represent a parser, but rather to handle the interaction with the user 
+during command input. Because parsing with respect to a grammar is not the 
+objective, the Interpreter pattern is not used. The state machine can be 
+implemented using boost state chart, but we think that may be overkill in this 
+case.
 
 The normal use case in getting and processing user input(s) within a state is:
 
 1) Prompt the user for the user's input corresponding to the state.
 2) Get the user's input corresponding to the prompt.
 3) Interpret the user's input to set the command data.
-4) Transition to the next state corresponding to the current command data and possibly external data such as the game state (i.e., damage state).
+4) Transition to the next state corresponding to the current command data and 
+possibly external data such as the game state (i.e., damage state).
 
 However, other use cases are:
 
-1) Transition to the next state is not dependent on prompted user input, but on external data only. The phasers command is an example. Depending on whether there are enemies present and the damage states of the computer and sensors, the transition to the next state can be either manual phasers, automatic phasers, or a prompt asking for manual or automatic.
-2) In the super star trek game, the user can input multiple segments of a command at once. For example, at the command prompt, the use can input "phasers manual" instead of waiting for the manual or automatic prompt. The expected behavior in this case is to parse the input and transition to the next appropriate state (i.e., skipping the intermediate states for which the command input has already been given). Note that the transitions along the way can also be influenced by external data.
-3) In the super star trek game, there are optional segments of the command data that can be input by the user at different states. The expected behavior is to parse for these optional inputs and to set the appropriate command data. In addition, there is default values for these optional inputs and handling of cases where the user may input these at multiple command states in which case the behavior is either to ignore the additional inputs or to signal error.
+1) Transition to the next state is not dependent on prompted user input, but on 
+external data only. The phasers command is an example. Depending on whether 
+there are enemies present and the damage states of the computer and sensors, the 
+transition to the next state can be either manual phasers, automatic phasers, or 
+a prompt asking for manual or automatic.
+2) In the super star trek game, the user can input multiple segments of a 
+command at once. For example, at the command prompt, the use can input 
+"phasers manual" instead of waiting for the manual or automatic prompt. The 
+expected behavior in this case is to parse the input and transition to the next 
+appropriate state (i.e., skipping the intermediate states for which the command 
+input has already been given). Note that the transitions along the way can also 
+be influenced by external data.
+3) In the super star trek game, there are optional segments of the command data 
+that can be input by the user at different states. The expected behavior is to 
+parse for these optional inputs and to set the appropriate command data. In 
+addition, there is default values for these optional inputs and handling of 
+cases where the user may input these at multiple command states in which case 
+the behavior is either to ignore the additional inputs or to signal error.
 
 To cover these other use cases:
 
-1) Separate concepts for PromptCommandState and CommandState. PromptCommandState inherits from CommandState and adds prompt event when 
-CommandQueue is empty. CommandState is used for situations where an intermediate state is necessary to make transition decisions based on 
-either external data or commands left on the queue. For example, CommandState as opposed to PromptCommandState is used for cases 
-where previously we had an empty prompt string.
-2) Added interface to CommandState to peek at the next element on the CommandQueue to check its value or to determine if the queue
-is empty. Peeking can be used to check for optional command data prior to getting (popping) them off the queue.
+1) Separate concepts for PromptCommandState and CommandState. PromptCommandState 
+inherits from CommandState and adds prompt event when CommandQueue is empty. 
+CommandState is used for situations where an intermediate state is necessary to 
+make transition decisions based on either external data or commands left on the 
+queue. For example, CommandState as opposed to PromptCommandState is used for 
+cases where previously we had an empty prompt string.
+2) Added interface to CommandState to peek at the next element on the 
+CommandQueue to check its value or to determine if the queue is empty. Peeking 
+can be used to check for optional command data prior to getting (popping) them 
+off the queue.
 
 Threads:
 
@@ -48,28 +136,35 @@ Threads:
   - Insert events into EventQueue to simulate command execution callback
   - Clear CommandQueue on error
   - Clear CommandQueue after execution of command
-  - When CommandQueue is empty, insert prompt from current state into PromptQueue
+  - When CommandQueue is empty, insert prompt from current state into 
+    PromptQueue
 3) Thread to handle events to simulate display of results from command execution
   - Waits on EventQueue
   - Pops messages from EventQueue
   - Ouput to std::cout
   
-Threads (1) and (3) can be same thread (main thread) and PropmtQueue can be EventQueue. In this case, we
-need to check message popped from queue to see if it is a prompt or just display. If display, just display.
-If prompt, then get input from std::cin.
+Threads (1) and (3) can be same thread (main thread) and PropmtQueue can be 
+EventQueue. In this case, we need to check message popped from queue to see if 
+it is a prompt or just display. If display, just display. If prompt, then get 
+input from std::cin.
 
-Deadlock between threads (1) and (2) can exist if both the PromptQueue and the CommandQueue are empty and 
-both threads are waiting on these queues. Nominally, this does not happen because thread (1) is guaranteed
-to insert at least one command into the CommandQueue after processing each prompt from the PromptQueue 
-unless the input is 'Q' at which time the application exits and thread (2) is guaranteed to insert a prompt
-into the PromptQueue after processing all commands from the CommandQueue. This implies that we must handle 
-white space command inputs (i.e., null commands). Note, we really only need one thread since processing
-prompts and commands is synchronous. We are using two threads to represent the GUI event loop. Since we have 
-two threads, what can unfortunately happen is if we clear the CommandQueue (because we are handling an error 
-or because we are executing the command) AFTER we inserted a new prompt into the PromptQueue, which in the 
-meantime has already been processed by thread (1) generating a command that we subsequently cleared. To avoid 
-this situation, when we handle an error or execute a command, we must clear the CommandQueue (and make sure 
-this operation is completed) before inserting the next prompt into the PromptQueue.
+Deadlock between threads (1) and (2) can exist if both the PromptQueue and the 
+CommandQueue are empty and both threads are waiting on these queues. Nominally, 
+this does not happen because thread (1) is guaranteed to insert at least one 
+command into the CommandQueue after processing each prompt from the PromptQueue 
+unless the input is 'Q' at which time the application exits and thread (2) is 
+guaranteed to insert a prompt into the PromptQueue after processing all commands 
+from the CommandQueue. This implies that we must handle white space command 
+inputs (i.e., null commands). Note, we really only need one thread since 
+processing prompts and commands is synchronous. We are using two threads to 
+represent the GUI event loop. Since we have two threads, what can unfortunately 
+happen is if we clear the CommandQueue (because we are handling an error or
+because we are executing the command) AFTER we inserted a new prompt into the 
+PromptQueue, which in the meantime has already been processed by thread (1) 
+generating a command that we subsequently cleared. To avoid this situation, when 
+we handle an error or execute a command, we must clear the CommandQueue (and 
+make sure this operation is completed) before inserting the next prompt into the 
+PromptQueue.
 
 With real system:
   - Threads (1) and (3) are GUI event loop
@@ -90,5 +185,6 @@ Collaborations:
 1) CommandState creates a PromptEvent or DisplayEvent object 
 2) CommandState stores the smart_ptr to Event object in the EventQueue
 3) Event thread pops Event from EventQueue and executes the Event
-4) The concrete Event is executed on the std::cout receiver to carry out the event.
+4) The concrete Event is executed on the std::cout receiver to carry out the 
+   event.
 

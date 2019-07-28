@@ -1,14 +1,14 @@
 /*
  *  target_location.hpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/24/11.
  *  Copyright 2011 Alan I Chao. All rights reserved.
  *
  */
 
-#ifndef TARGET_LOCATION_HPP
-#define TARGET_LOCATION_HPP
+#ifndef iTrek_target_location_hpp
+#define iTrek_target_location_hpp
 
 #include <utility>
 

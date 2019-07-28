@@ -1,6 +1,6 @@
 /*
  *  manual_phaser_units.cpp
- *  TestCommandState
+ *  iTrek
  *
  *  Created by Alan Chao on 10/23/11.
  *  Copyright 2011 Alan I Chao. All rights reserved.
@@ -13,11 +13,12 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CommandStateFactory.hpp"
-#include "GlobalState.hpp"
+#include "command_state_factory.hpp"
+#include "global_state.hpp"
+#include "command_input_utilities.hpp"
 
 namespace iTrek { 
-namespace CommandInputState {
+namespace command_input_state {
   
 // @todo: tgt_energy_ computation is more complex than this
 manual_phaser_units::manual_phaser_units(unsigned i_tgt, unsigned n_tgts)
@@ -27,36 +28,42 @@ manual_phaser_units::manual_phaser_units(unsigned i_tgt, unsigned n_tgts)
       tgt_type_(get_object_type(quad[loc_.first][loc_.second])) {
 }
     
-void manual_phaser_units::executeAction(CommandInputHandler * handler) {
-  // Pop a value from the queue
-  CommandInputs tokens;
-  getCommandInputs(1, tokens);
-  // try to cast it to double
-  try {
-    double value = boost::lexical_cast<double>(tokens[0]);
-    // if value is positive, append it to the command data
-    if (value > 0.) {
-      CommandState::appendCommandData(handler, tokens[0]);
-      if (i_tgt_ == n_tgts_) {
-        CommandState::changeState(handler, CommandStateFactory::instance().createCommandState("_execmd"));
-      } else {
-        CommandState::changeState(handler, boost::shared_ptr<manual_phaser_units>(new manual_phaser_units(++i_tgt_, n_tgts_)));        
-      }
-    } else {
-      // else transition back to this state to try again
-      CommandState::changeState(handler, boost::shared_ptr<manual_phaser_units>(new manual_phaser_units(*this)));
-    }
-  } catch (boost::bad_lexical_cast &) {
-    // If fail, catch exception and transition back to this state to try again
-    CommandState::changeState(handler, boost::shared_ptr<manual_phaser_units>(new manual_phaser_units(*this)));
+boost::logic::tribool manual_phaser_units::handle(command_input_handler* handler) const {
+  // Pop a value from the token queue
+  command_inputs tokens;
+  get_command_inputs(handler, 1, tokens);
+  command_data value = tokens[0];
+  // if value is empty, not a number or a number <= 0,
+  // return false to signal that input cannot be handled
+  if (value.empty() || !is_number(value) || 
+      boost::lexical_cast<double>(value) <= 0.) {
+    clear_token_queue(handler);
+    return false;    
   }
+  append_command_data(handler, value);
+  // check to see if all targets have been handled
+  if (i_tgt_ == n_tgts_) {
+    // clear token queue
+    clear_token_queue(handler);
+    // transition the command state to get_command
+    change_state(handler, boost::shared_ptr<command_state>(
+        command_state_factory::instance().create_command_state("_getcmd")));
+    // return true (complete)
+    return true;    
+  }
+  // if not, go to the next target
+  change_state(handler, boost::shared_ptr<manual_phaser_units>(
+      new manual_phaser_units(++i_tgt_, n_tgts_)));
+  return handled_but_incomplete;
 }
 
-std::string manual_phaser_units::getPrompt() const {
-  std::ostringstream PromptStr;
-  PromptStr << "(" << tgt_energy_ << ")  units to fire at " << tgt_type_ << " at Sector " << loc_.first << " - " << loc_.second << "- ";
-  return PromptStr.str();
+boost::optional<std::string> manual_phaser_units::prompt() const {
+  std::ostringstream prompt_sstrm;
+  prompt_sstrm << "(" << tgt_energy_ << ")  units to fire at " 
+               << tgt_type_ << " at Sector " << loc_.first 
+               << " - " << loc_.second << "- ";
+  return boost::optional<std::string>(prompt_sstrm.str());
 }
   
-} // end namespace CommandInputState
+} // end namespace command_input_state
 } // end namespace iTrek

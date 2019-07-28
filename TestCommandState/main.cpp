@@ -1,68 +1,46 @@
 #include <iostream>
-#include <boost/thread/thread.hpp>
-#include "CommandInputHandler.hpp"
-#include "EventQueue.hpp"
-#include "CommandQueue.hpp"
+#include <string>
 
-//#include "CommandInputEvent.hpp"
-//#include <boost/tokenizer.hpp>
-//#include <boost/algorithm/string/case_conv.hpp>
-//#include <boost/lexical_cast.hpp>
-#include <memory>
-#include "GetCommand.hpp"
+#include <boost/optional.hpp>
 
-int main (int argc, char * const argv[]) 
-{
-  
-  /*
-  // test the boost::tokenizer
-  // Send the prompt message to std::cout
-  std::cout << "Test Input Tokenization> " << std::flush;
-  // get line of input from std::cin
-  const unsigned N = 128;
-  char cmd_cstr[ N ];
-  std::cin.getline( cmd_cstr, N );
-  iTrek::CommandInputEvent command( cmd_cstr );
-  // convert to lower case
-  boost::to_lower(command);
-  // tokenize with space delimiter
-  boost::char_separator<char> sep(" ");
-  boost::tokenizer< boost::char_separator<char> > tokens(command, sep);
-  std::size_t i = 0;
-  for( boost::tokenizer< boost::char_separator<char> >::iterator beg = tokens.begin(); beg != tokens.end(); ++beg, ++i )
-  {
-    try
-    {
-      std::cout << "Token " << i << ": " << boost::lexical_cast<double>(*beg) << " is a double" << std::endl;
+#include "command_input_event.hpp"
+#include "command_input_handler.hpp"
+#include "command_data.hpp"
+#include "command_state.hpp"
+
+int main (int argc, char * const argv[]) {
+  // construct command_input_handler and enter into event loop
+  iTrek::command_input_handler cmd_handler;
+  iTrek::command_data complete_cmd;
+  do {
+    // get the prompt
+    boost::optional<std::string> prompt = cmd_handler.current_state().prompt();
+    iTrek::command_input_event cmd_inp;
+    if (prompt) {
+      std::cout << (*prompt);
+      const unsigned N = 128;
+      char cmd_cstr[ N ];
+      std::cin.getline(cmd_cstr, N);
+      cmd_inp = cmd_cstr;
+    } else {
+      std::cout << "Error: current state should return a prompt" << std::endl;
+      exit(-1);
     }
-    catch ( boost::bad_lexical_cast & )
-    {
-      std::cout << "Token " << i << ": " << *beg << " is a string" << std::endl;
+    bool complete = cmd_handler.handle(cmd_inp);
+    // get display events (if any) and send to std::cout
+    std::string display_events = cmd_handler.get_display_events();
+    if (!display_events.empty()) {
+      std::cout << display_events << std::endl;
+      cmd_handler.clear_display_events();
     }
-  }
-   */
-  
-  // construct CommandInputHandler and start it in its own thread
-  iTrek::CommandInputHandler cmdHandler;
-  boost::thread commandHandlerThread( cmdHandler );
-  // detach the thread
-  commandHandlerThread.detach();
-  
-  // simulate input event loop
-  while (1)
-  {
-    // Pop Events from the EventQueue and execute them
-    {
-      iTrek::EventQueue::object_type::wait_lock_t lock( iTrek::EventQueue::instance().queueMutex );
-      iTrek::EventQueue::instance().wait( lock );
-      while ( !( iTrek::EventQueue::instance().empty() ) )
-      {
-        // Execute the Event at the front of the queue by calling operator()
-        ( *iTrek::EventQueue::instance().front() )();
-        iTrek::EventQueue::instance().pop();
-      }
+    if (complete) {
+      complete_cmd = cmd_handler.get_command_data();
+      std::cout << "Executing: " << complete_cmd << std::endl;
+      cmd_handler.clear_command_data();
     }
-  }
+  } while (complete_cmd != "quit");
+  
+  std::cout << "Quitting TestCommandState" << std::endl;
   
   return 0;
 }
