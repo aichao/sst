@@ -48,6 +48,20 @@ Therefore:
     handled_but_incomplete
   - if it does not match either "yes" or "no" (else), transition to command 
     error and return handled_but_incomplete
+    
+Game State Visitor:
+
+Two options for use:
+i) special command state that calls the visitor. The visitor then transitions 
+   the state and returns handled_but_incomplete.
+ii) the command state calls the visitor, but the visitor does not transition 
+    the state. Instead, it returns a status depending on the game state that
+    is checked that is then interpreted by the command state caller to 
+    transition the state.
+The advantage of the first is encapsulation. The command state does not need 
+to know anything about the game state to interpret what is returned by the 
+visitor. However, the visitor then needs to also be a friend of the 
+command_input_handler in order to transition the state.
 
 CommandState
 

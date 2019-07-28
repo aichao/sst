@@ -17,6 +17,7 @@
 
 #include "command_input_event.hpp"
 #include "command_data.hpp"
+#include "game_state_visitor.hpp"
 
 namespace iTrek {
   
@@ -69,17 +70,26 @@ class command_input_handler {
   command_state const& current_state() const { return *state_; }
   
 private:
-  
-  /** command_state is a friend of this class so that it
-   *  can call change_state() to change the state.
+  /** command_state and game_state_visitor are friends of this class so that
+   *  they can call change_state() and add_display_event().
    */
   friend class command_state;
+  friend class game_state_visitor;
   
   /// change the command_state to state
   void change_state(boost::shared_ptr<command_state> state) { 
-    state_ = state; 
+    this->state_ = state;
+  }
+
+  void add_display_event(std::string const& msg) {
+    this->disp_events_ += (msg + '\n');
   }
   
+  /** Visitor to check the status of the command state with respect to the 
+   *   game state
+   */
+  game_state_visitor gs_checker_;
+
   /** Reference to the current command_state object. 
    *  This should be a smart pointer (or we must explicitly manage its
    *  destruction on transitions) if the states are not singletons.

@@ -71,7 +71,7 @@ void command_state::get_command_inputs(
 void command_state::add_display_event(command_input_handler* handler, 
                                       std::string const& msg) const {
   // forwards message to handler
-  handler->disp_events_ += (msg + '\n');
+  handler->add_display_event(msg);
 }
 
 } // end namespace iTrek

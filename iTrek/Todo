@@ -327,6 +327,21 @@ Computer/database:
 Materials/trade/transport/shuttle/mine/damages/repair:
 Communications/probe/intelligence:
 
+Probes:
+Currently, probes are used to find enemes. However, this assumes a static game
+state where enemies are stationary. Instead, probes should sense planets and
+events. Sensing of planets include sensing of resources in those planets including
+civilizations and their technology level. Civilizations with low technology level
+may be easier to conquer by the enemy and easier to trade with. On the other hand,
+civilizations with higher technology levels may not want to take sides (i.e.,
+offer to trade) or can be outright hostile.Sensing of events include detecting
+enemy locations and communications. These include, for example, distress calls
+from attacked ships or civilizations or enemy communications on their convoy
+locations. Probes travel faster than the ship (i.e., sustained warp 9) but have
+limited life. They themselves are hard to detect and will self-destruct at the
+end of their range to avoid detection. There is a cost in building and sending
+a probe in terms of resources.
+
 Storyline:
 - An interesting storyline would be to go back in time to change events in order 
 to win the game. Going back in time will require a special resource or 

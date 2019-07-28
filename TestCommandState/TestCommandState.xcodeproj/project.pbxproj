@@ -12,6 +12,7 @@
 		960AD4A91B2E49550046C899 /* move_mode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 960AD4A71B2E49530046C899 /* move_mode.cpp */; };
 		960AD4AC1B2E4CF30046C899 /* move_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 960AD4AA1B2E4CF00046C899 /* move_manual.cpp */; };
 		960AD4AF1B2E63380046C899 /* move_automatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 960AD4AD1B2E63350046C899 /* move_automatic.cpp */; };
+		964ECC101B409EBE003AFEE5 /* game_state_visitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964ECC0E1B409EBE003AFEE5 /* game_state_visitor.cpp */; };
 		96E5A232179B3EDA005C6182 /* command_state_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96E5A230179B3EDA005C6182 /* command_state_factory.cpp */; };
 		96E5A273179B470D005C6182 /* command_input_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96E5A271179B470D005C6182 /* command_input_handler.cpp */; };
 		96E5A279179B4C83005C6182 /* command_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96E5A277179B4C83005C6182 /* command_state.cpp */; };
@@ -93,6 +94,8 @@
 		960AD4AB1B2E4CF20046C899 /* move_manual.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = move_manual.hpp; sourceTree = "<group>"; };
 		960AD4AD1B2E63350046C899 /* move_automatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = move_automatic.cpp; sourceTree = "<group>"; };
 		960AD4AE1B2E63360046C899 /* move_automatic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = move_automatic.hpp; sourceTree = "<group>"; };
+		964ECC0E1B409EBE003AFEE5 /* game_state_visitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_state_visitor.cpp; sourceTree = "<group>"; };
+		964ECC0F1B409EBE003AFEE5 /* game_state_visitor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_state_visitor.hpp; sourceTree = "<group>"; };
 		968C9DB3110272F90013A651 /* MainPage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MainPage.txt; sourceTree = "<group>"; };
 		96E5A230179B3EDA005C6182 /* command_state_factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = command_state_factory.cpp; sourceTree = "<group>"; };
 		96E5A231179B3EDA005C6182 /* command_state_factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = command_state_factory.hpp; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				96F693DF145337BD009561EC /* command_input_utilities.hpp */,
 				96F693E0145337BD009561EC /* command_input_utilities.cpp */,
 				96F6957914560F9B009561EC /* target_location.hpp */,
+				964ECC0E1B409EBE003AFEE5 /* game_state_visitor.cpp */,
+				964ECC0F1B409EBE003AFEE5 /* game_state_visitor.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				96EEFB631B3371A40051781B /* shuttle_command.cpp in Sources */,
 				96EEFB641B3371A40051781B /* status_command.cpp in Sources */,
 				96EEFB651B3371A40051781B /* transport_command.cpp in Sources */,
+				964ECC101B409EBE003AFEE5 /* game_state_visitor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

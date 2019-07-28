@@ -30,40 +30,6 @@ const bool registered = command_state_factory::instance().register_command_state
 }
   
 boost::logic::tribool phasers_command::handle(command_input_handler* handler) const {
-  // @todo: this stuff is actually reactions to the command and should be part of
-  // ship state, which is part of game state.
-  // if docked, say so and ignore command
-  if (condit == IHDOCKED) {
-    add_display_event(handler, "Phasers can't be fired through base shields.");
-    change_state(handler, boost::shared_ptr<command_state>(
-        command_state_factory::instance().create_command_state("_ignorecmd")));
-    return handled_but_incomplete;
-  }
-  // if phasers are damaged, say so and ignore command
-  if (damage[DPHASER] != 0) {
-    add_display_event(handler, "Phaser control damaged.");
-    change_state(handler, boost::shared_ptr<command_state>(
-        command_state_factory::instance().create_command_state("_ignorecmd")));
-    return handled_but_incomplete;
-  }
-  // if shields are up and shields are damaged or energy is insufficient to activate
-  // high speed shield control, say so and ignore command
-  if ( shldup ) {
-    if ( damage[DSHCTRL] ) {
-      add_display_event(handler, "High speed shield control damaged.");
-      change_state(handler, boost::shared_ptr<command_state>(
-          command_state_factory::instance().create_command_state("_ignorecmd")));
-      return handled_but_incomplete;
-    }
-    if ( energy <= 200.0 ) {
-      add_display_event(handler, "Insufficient energy to activate high-speed shield control.");
-      change_state(handler, boost::shared_ptr<command_state>(
-          command_state_factory::instance().create_command_state("_ignorecmd")));
-      return handled_but_incomplete;
-    }
-    // else display message for enabling high speed shield control
-    add_display_event(handler, "Weapons Officer Sulu-  \"High-speed shield control enabled, sir.\"");
-  }
   // add the command name "phasers" to command data
   append_command_data(handler, "phasers");
   // transition the command state to execmd
